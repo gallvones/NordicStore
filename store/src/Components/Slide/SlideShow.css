@@ -1,0 +1,14 @@
+.slide{
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.slide__item {
+    width: 80%;
+    height: 500px;
+    margin-left: 10%;
+
+    /*object-fit: cover;*/
+}
+

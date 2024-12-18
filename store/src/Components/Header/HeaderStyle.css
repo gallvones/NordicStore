@@ -1,0 +1,18 @@
+.header {
+    background-color: rgb(10, 10, 10);
+    width: 100%;
+    z-index: 1;
+}
+
+.header > div {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px;
+}
+
+.name {
+    font-size: 30px;
+    color: yellow;
+    font-weight: bold;
+}
