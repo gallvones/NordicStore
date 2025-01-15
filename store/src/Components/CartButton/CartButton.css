@@ -1,5 +1,6 @@
+
 .cart {
-    font-size: 2rem;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,12 +11,14 @@
     position: relative;
     margin-left: 20px;
     color: white;
+    
+    
 }
 
 .status {
     background-color: yellow;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     position: absolute;
     top: 0;
     left: 0;

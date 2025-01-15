@@ -1,18 +1,32 @@
 .header {
-    background-color: rgb(10, 10, 10);
+    display: flex;
+    background-color: rgb(0, 0, 0);
     width: 100%;
-    z-index: 1;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 15px;
+    gap: 20px;
+    position: relative; 
 }
 
-.header > div {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 15px;
+.logo {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-grow: 1; /* Garante que a div logo ocupe o espaço disponível */
+}
+
+.icons {
+    display: flex;
+    position: absolute; /* Posiciona os ícones em relação à div .header */
+    right: 50px; /* Coloca os ícones no final da página */
+    gap: 10px;
+    margin-top: 98px;
+    
 }
 
 .name {
-    font-size: 30px;
-    color: yellow;
-    font-weight: bold;
+    width: 300px;
+    height: 150px;
 }
+
