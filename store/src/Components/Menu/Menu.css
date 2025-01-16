@@ -21,4 +21,11 @@
 
 .items >div{
     font-family: 'Red Hat Display';
+    cursor: pointer;
+    
+}
+
+.items > div:hover{
+    color: yellow;
+
 }

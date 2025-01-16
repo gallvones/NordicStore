@@ -10,4 +10,9 @@
     position: relative;
     margin-left: 20px;
     color: rgb(217, 217, 216);
+    cursor:pointer;
+}
+
+.mail-icon:hover{
+    color: yellow;
 }
