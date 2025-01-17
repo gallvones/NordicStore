@@ -6,3 +6,11 @@
   font-family: 'Exo 2', sans-serif;
   
 }
+
+hr {
+  border: none; 
+  height: 1px; 
+  background-color: #01274e; 
+}
+
+
