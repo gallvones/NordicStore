@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 .list{
-    background-color: black;
+    background-color:  #f1f1f1;;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -11,21 +10,20 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    color: rgb(217, 217, 216);
+    color: #01274e;
     padding: 5px;
-    gap: 80px;
-    font-size:23px;
-    letter-spacing: 1.5px;
-    font-weight: bold;
+    gap: 60px;
+    font-size:21px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
 }
 
 .items >div{
-    font-family: 'Red Hat Display';
     cursor: pointer;
     
 }
 
 .items > div:hover{
-    color: yellow;
+    color: #d1ae88;
 
 }

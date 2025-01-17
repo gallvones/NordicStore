@@ -12,7 +12,6 @@ function App() {
     <div className="Header">
     <Header/> 
     <Menu/>
-    <hr/>
     </div>
     <div className="Body">
       <hr/>

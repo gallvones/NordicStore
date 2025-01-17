@@ -2,13 +2,14 @@
   .heading {
     font-size: 3rem;
     text-align: center;
-    color: yellow;
+    color: #01274e;
     
   }
   .container {
     max-width: 124rem;
     padding: 2rem 1rem;
     margin: 0 auto;
+    background-color: #f1f1f1;
   }
   
   .swiper_container {

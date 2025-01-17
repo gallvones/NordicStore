@@ -1,5 +1,5 @@
 .mail-icon{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,10 +9,11 @@
     cursor: pointer;
     position: relative;
     margin-left: 20px;
-    color: rgb(217, 217, 216);
+    color: #01274e;
     cursor:pointer;
 }
 
 .mail-icon:hover{
-    color: yellow;
+    color: #d1ae88;
+    
 }
