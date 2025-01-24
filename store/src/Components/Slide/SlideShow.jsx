@@ -33,6 +33,7 @@ const imgs = [
         autoplay={{
           delay: 4000, 
           disableOnInteraction: false,
+          
         }}
         >
           <br/><br/>
