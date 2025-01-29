@@ -1,22 +1,21 @@
 import { useState } from "react"
-import '../ItemCarrousel/item.css';
+import '../ItemCarrousel/item3.css';
 
-const Item = ({ItemValues}) => {
+const Item3 = ({ItemValues}) => {
 const {img,price,img2,title} = ItemValues;
 const [currentImg, setCurrentImg] = useState(img);
 
   return (
-    <div className="container">
+    <div className="container3">
     <div 
     onMouseMove={() => setCurrentImg(img2)}
       onMouseOut={() => setCurrentImg(img)}
-      className="item"
+      className="item3"
     >
-<img src={currentImg}  className="item_image" alt=""/>
-<div className="item_info">
+<img src={currentImg}  className="item_image3" alt=""/>
+<div className="item_info3">
   <p> {title}</p>
-<h1 className="item_price">{price}</h1>
-
+<h1 className="item_price3">{price}</h1>
 
 </div>
     </div>
@@ -25,4 +24,4 @@ const [currentImg, setCurrentImg] = useState(img);
   )
 }
 
-export default Item 
+export default Item3;

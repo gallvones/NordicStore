@@ -5,6 +5,9 @@ import Products from "./Components/Products/Products";
 import Provider from "./context/Provider";
 import Menu from "./Components/Menu/Menu";
 import Section1 from "./Components/Sections/Section1";
+import Section2 from "./Components/Sections/Section2";
+import Section3 from "./Components/Sections/Section3";
+
 
 function App() {
   return (
@@ -20,6 +23,10 @@ function App() {
     <hr/>
     <Section1/>
     <hr/>
+   <Section2/>
+   <hr/>
+   <Section3/>
+   <hr/>
     <Products/>
     </div>
   </div>
