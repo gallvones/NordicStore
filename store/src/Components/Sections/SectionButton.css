@@ -19,6 +19,11 @@ color: black;
 font-weight: bold;
 margin-top: -40px;
 }
+
+.btn:hover {
+    background-color: #01274e;
+    color: white;
+}
 .link_btn{
     text-decoration: none;
     

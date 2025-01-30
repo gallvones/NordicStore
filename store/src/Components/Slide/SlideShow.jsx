@@ -1,6 +1,5 @@
 import React from 'react';
 import './SlideShow.css';
-import Load from '../img/loading.jpeg';
 //Slide
 import { register } from 'swiper/element/bundle';
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -16,9 +15,9 @@ register();
 const SlideShow = () => {
 
 const imgs = [
-  { id: '1', Image: Load},
-  { id: '2', Image: Load},
-  { id: '3', Image: Load},
+  { id: '1', Image: ''},
+  { id: '2', Image: ''},
+  { id: '3', Image: ''},
 ]
 
   return (

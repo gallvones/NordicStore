@@ -7,6 +7,8 @@ import Menu from "./Components/Menu/Menu";
 import Section1 from "./Components/Sections/Section1";
 import Section2 from "./Components/Sections/Section2";
 import Section3 from "./Components/Sections/Section3";
+import Footer from "./Components/Footer/Footer";
+
 
 
 function App() {
@@ -27,7 +29,9 @@ function App() {
    <hr/>
    <Section3/>
    <hr/>
-    <Products/>
+    </div>
+    <div className="Footer">
+<Footer/>
     </div>
   </div>
   </Provider>
