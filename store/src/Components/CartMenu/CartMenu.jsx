@@ -1,22 +1,17 @@
 import React from 'react';
-import './CartMenu.css'; // Estilos específicos para o CartMenu
+import './CartMenu.css'; 
+import { BsFillCartXFill } from "react-icons/bs";
+import { IoMdCloseCircle } from "react-icons/io";
 
-const CartMenu = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
 
+const CartMenu = () => {
   return (
-    <div className="cart-menu-overlay">
-      <div className="cart-menu">
-        <button className="close-button" onClick={onClose}>X</button>
-        <h2>Carrinho de Compras</h2>
-        {/* Aqui você pode adicionar os itens do carrinho */}
-        <div className="cart-items">
-          {/* Exemplo de item */}
-          <div className="cart-item">
-            <span>Produto 1</span>
-            <span>R$ 50,00</span>
-          </div>
-        </div>
+    <div className='cart_menu' >
+      <div className='empty_cart'>
+        <button className='button_close'> <IoMdCloseCircle /></button>
+        <p>Seu carrinho está vazio!</p>
+        <p className='cart_icon_empty'><BsFillCartXFill/></p>
+        
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import Section1 from "./Components/Sections/Section1";
 import Section2 from "./Components/Sections/Section2";
 import Section3 from "./Components/Sections/Section3";
 import Footer from "./Components/Footer/Footer";
+import CartMenu from "./Components/CartMenu/CartMenu";
 
 
 
@@ -15,6 +16,9 @@ function App() {
   return (
     <Provider>
     <div className="Aplication">
+      <div className="MenuCart_Suspended">
+<CartMenu/>
+      </div>
     <div className="Header">
     <Header/> 
     <Menu/>
