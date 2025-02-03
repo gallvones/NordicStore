@@ -1,15 +1,24 @@
 import React from 'react';
 import './HeaderStyle.css';
-import Logo from '../img/logo.jpg';
+import Logo from '../img/logo3.png';
 import CartButton from '../CartButton/CartButton';
 import Instagram from '../Instagram/Instagram';
 import Mail from '../Mail/Mail';
 
 const Header = () => {
   return (
-    <div className='header'>
+    <div className='header_container'>
     <div className='logo'>
-        <img src= {Logo} className='name' alt='logo-print' />
+        <img src= {Logo} alt='logo-print' />
+    </div>
+    <div className='anchors'>
+    <div className='items'>
+      <div className='name'>NORDIC STORE</div>
+        <div>Camisetas</div>
+        <div>Tenis</div>
+        <div>Bermudas</div>
+        </div>
+
     </div>
     <div className='icons'>
       <div><Instagram/></div>

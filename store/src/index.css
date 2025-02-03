@@ -4,13 +4,14 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Exo 2', sans-serif;
- background-color: #f1f1f1;
+  background-color: rgba(51, 68, 75, 1);
 }
 
 hr {
   border: none; 
   height: 1px; 
-  background-color: #01274e; 
+ background-color: rgba(94, 128, 137, 1);
 }
+
 
 
