@@ -4,6 +4,7 @@ import Logo from '../img/logo3.png';
 import CartButton from '../CartButton/CartButton';
 import Instagram from '../Instagram/Instagram';
 import Mail from '../Mail/Mail';
+import Login from '../Login/Login.jsx';
 
 const Header = () => {
   return (
@@ -12,7 +13,7 @@ const Header = () => {
         <img src= {Logo} alt='logo-print' />
     </div>
     <div className='anchors'>
-    <div className='items'>
+    <div className='items_anchors'>
       <div className='name'>NORDIC STORE</div>
         <div>Camisetas</div>
         <div>Tenis</div>
@@ -22,8 +23,10 @@ const Header = () => {
     </div>
     <div className='icons'>
       <div><Instagram/></div>
+      <div><Login/></div>
       <div><Mail/></div>
       <div><CartButton/></div>
+      
     </div>
     </div>
   )

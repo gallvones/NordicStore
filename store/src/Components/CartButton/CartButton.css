@@ -10,13 +10,13 @@
     cursor: pointer;
     position: relative;
     margin-left: 20px;
-    color: #01274e;
+    color: rgba(94, 128, 137, 1);
     
     
 }
 
 .status {
-    background-color: #d1ae88;
+    background-color: rgba(94, 128, 137, 1);
     width: 15px;
     height: 15px;
     position: absolute;
@@ -32,6 +32,6 @@
     padding: 0.6rem;
 }
 .cart:hover{
-    color: #d1ae88;
+    color: rgba(138, 194, 207, 1);
 }
 

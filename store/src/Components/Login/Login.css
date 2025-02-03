@@ -1,4 +1,4 @@
-.instagram-icon{
+.login_icon{
     font-size: 1.7rem;
     display: flex;
     align-items: center;
@@ -12,6 +12,6 @@
     color: rgba(94, 128, 137, 1);
     cursor: pointer;
 }
-.instagram-icon:hover{
+.login_icon:hover{
     color: rgba(138, 194, 207, 1);
 }

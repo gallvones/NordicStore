@@ -9,11 +9,11 @@
     cursor: pointer;
     position: relative;
     margin-left: 20px;
-    color: #01274e;
+    color: rgba(94, 128, 137, 1);
     cursor:pointer;
 }
 
 .mail-icon:hover{
-    color: #d1ae88;
+    color: rgba(138, 194, 207, 1);
     
 }
