@@ -3,7 +3,9 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    position: relative; 
+    position:fixed;
+    z-index: 1000; 
+    gap: 3%;
 }
 
 .logo {
@@ -46,7 +48,7 @@ height: 130px;
     justify-content: center;
     color: #f1f1f1;
     gap: 3%;
-    font-size:21px;
+    font-size:1.5rem;
     letter-spacing: 3px;
     
 }

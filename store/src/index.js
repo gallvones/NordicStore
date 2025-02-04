@@ -4,11 +4,29 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Importando rotas
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginAccount from './pages/loginAccount.jsx';
+import RegisterAccount from './pages/RegisterAccount.jsx';
 
+ const router = createBrowserRouter([
+  {
+path:"/",
+element: <App/>
+  },
+  {
+   path: "login",
+   element: <LoginAccount/> 
+  },
+  {
+    path: "register",
+    element: <RegisterAccount/>
+  }
+ ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

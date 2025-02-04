@@ -22,9 +22,9 @@ const imgs = [
 
   return (
     <div className='slide'>
+      <hr/>
       <br/>
       <br/>
-      
         <Swiper
         slidesPerView={1}
         pagination={{ clickable: true}}
