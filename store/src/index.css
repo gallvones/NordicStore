@@ -13,5 +13,9 @@ hr {
  background-color: rgba(94, 128, 137, 1);
 }
 
+a {
+  color: inherit; 
+  text-decoration: none; 
+}
 
 

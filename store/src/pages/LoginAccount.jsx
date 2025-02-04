@@ -1,8 +1,11 @@
 import React from 'react'
-
 const loginAccount = () => {
   return (
-    <div>loginAccount</div>
+    <div  className='loginAccount_container'>
+ 
+ 
+
+    </div>
   )
 }
 
