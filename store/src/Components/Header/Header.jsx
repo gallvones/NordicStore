@@ -11,10 +11,10 @@ const Header = () => {
     <div className='header_container'>
     <div className='logo'>
         <img src= {Logo} alt='logo-print' />
+        <div className='name'>NORDIC STORE</div>
     </div>
     <div className='anchors'>
     <div className='items_anchors'>
-      <div className='name'>NORDIC STORE</div>
         <div>Camisetas</div>
         <div>Tenis</div>
         <div>Bermudas</div>

@@ -8,6 +8,7 @@
 
 .logo {
     display: flex;
+    flex-direction: column;
     justify-content: center; 
     align-items: center; 
     height: 200px;
@@ -43,7 +44,7 @@ height: 130px;
     display:flex;
     align-items: center;
     justify-content: center;
-    color: black;
+    color: #f1f1f1;
     gap: 3%;
     font-size:21px;
     letter-spacing: 3px;

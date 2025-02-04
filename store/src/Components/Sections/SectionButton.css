@@ -1,6 +1,5 @@
 .all_space{
 padding: 10px;
-background-color: #f1f1f1;
 
 }
 
@@ -8,20 +7,20 @@ background-color: #f1f1f1;
 font-size: 15px;
 width: 100%;
 height: 3vh;
-border: solid 2px #01274e;
+border: solid 3px rgba(94, 128, 137, 1); 
 border-radius: 30px;
 padding: 20px;
 display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
-color: black;
+color: white;
 font-weight: bold;
 }
 
 .btn:hover {
-    background-color: #01274e;
-    color: white;
+    background-color: rgba(138, 194, 207, 1);
+    color: black;
 }
 .link_btn{
     text-decoration: none;
