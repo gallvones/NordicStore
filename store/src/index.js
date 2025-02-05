@@ -11,6 +11,7 @@ import RegisterAccount from './pages/RegisterAccount.jsx';
 
 
  const router = createBrowserRouter([
+
   {
 path:"/",
 element: <App/>

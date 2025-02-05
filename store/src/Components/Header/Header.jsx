@@ -11,7 +11,10 @@ const Header = () => {
     <div className='header_container'>
     <div className='logo'>
         <img src= {Logo} alt='logo-print' />
-        <div className='name'>NORDIC STORE</div>
+        <div className='name'>
+          NORDIC STORE
+        </div>
+        
     </div>
     <div className='anchors'>
     <div className='items_anchors'>
@@ -26,9 +29,9 @@ const Header = () => {
       <div><Login/></div>
       <div><Mail/></div>
       <div><CartButton/></div>
-      
     </div>
     </div>
+    
   )
 }
 

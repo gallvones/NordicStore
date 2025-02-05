@@ -2,6 +2,7 @@
   width: 100%;
   margin: 0 auto;
   height: 50vh;
+  max-height: 50vh;
   margin-top: 20%;
 }
 
