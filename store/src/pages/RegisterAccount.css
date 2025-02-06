@@ -23,8 +23,10 @@
  .img_logo{
      width: 250px;
      height: 180px;
-     margin-top: 2%
+     margin-top: 2%;
+     cursor: pointer;
  }
+ 
  .register_title{
      margin-top: 3%;
      color: rgba(138, 194, 207, 1);

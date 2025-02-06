@@ -23,7 +23,8 @@
 .imgLogin_logo{
     width: 250px;
     height: 180px;
-    margin-top: 2%
+    margin-top: 2%;
+    cursor: pointer;
 }
 .login_title{
     margin-top: 1%;
@@ -71,7 +72,10 @@
 }
 .register_link{
     color:rgba(138, 194, 207, 1);
-    font-weight: bold;
     margin-left: 1%;
+    cursor: pointer;
+}
+.register_link:hover {
+    font-weight: bold;
 }
 
