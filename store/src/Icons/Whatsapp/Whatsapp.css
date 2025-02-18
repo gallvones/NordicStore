@@ -1,0 +1,19 @@
+.zap-icon{
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: -2%;
+    color: white;
+    cursor:pointer;
+}
+
+.zap-icon:hover{
+    color: rgba(138, 194, 207, 1);
+    
+}

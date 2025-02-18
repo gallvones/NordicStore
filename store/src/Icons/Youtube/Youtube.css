@@ -1,4 +1,4 @@
-.instagram-icon{
+.youtube-icon{
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -10,8 +10,10 @@
     position: relative;
     margin-left: 20px;
     color: white;
-    cursor: pointer;
+    cursor:pointer;
 }
-.instagram-icon:hover{
+
+.youtube-icon:hover{
     color: rgba(138, 194, 207, 1);
+    
 }

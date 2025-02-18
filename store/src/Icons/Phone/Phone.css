@@ -1,17 +1,19 @@
-.login_icon{
+.phone-icon{
     font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px;
+    margin-left: -2.5%;
     border: none;
     background: none;
     cursor: pointer;
     position: relative;
-    margin-left: 20px;
     color: white;
-    cursor: pointer;
+    cursor:pointer;
 }
-.login_icon:hover{
+
+.phone-icon:hover{
     color: rgba(138, 194, 207, 1);
+    
 }

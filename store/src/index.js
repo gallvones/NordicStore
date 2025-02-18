@@ -6,8 +6,9 @@ import reportWebVitals from './reportWebVitals';
 
 // Importando rotas
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import LoginAccount from './pages/loginAccount.jsx';
+import LoginAccount from './pages/LoginAccount.jsx';
 import RegisterAccount from './pages/RegisterAccount.jsx';
+import AboutUs from './pages/AboutUs.jsx';
 
 
  const router = createBrowserRouter([
@@ -23,6 +24,10 @@ element: <App/>
   {
     path: "register",
     element: <RegisterAccount/>
+  },
+  {
+    path: "aboutUs",
+    element: <AboutUs/>
   }
  ])
 const root = ReactDOM.createRoot(document.getElementById('root'));

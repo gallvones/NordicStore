@@ -11,12 +11,12 @@ app.use(cors());
 // Configuração da conexão com o MySQL
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root', // Substitua pelo seu usuário do MySQL
-  password: 'Galvao2003?', // Substitua pela sua senha do MySQL
-  database: 'nordic_store' // Substitua pelo nome do banco de dados
+  user: 'root', 
+  password: 'Galvao2003?', 
+  database: 'nordic_store' 
 });
 
-// Conectar ao MySQL
+// COnexão com o sql
 connection.connect((err) => {
   if (err) {
     console.error('Erro ao conectar ao MySQL:', err);
@@ -25,7 +25,7 @@ connection.connect((err) => {
   console.log('Conectado ao MySQL!');
 });
 
-// Rota para cadastrar um novo usuário
+// Rota definida
 app.post('/cadastrar', (req, res) => {
   const { nome, sobrenome, telefone, cep, email, senha } = req.body;
 
@@ -48,7 +48,7 @@ app.post('/cadastrar', (req, res) => {
   );
 });
 
-// Iniciar o servidor
+// Iniciar o servidor local 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });

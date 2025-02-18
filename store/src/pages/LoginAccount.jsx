@@ -1,8 +1,8 @@
 import React from 'react'
 import Logo from '../Components/img/logo3.png';
-import '../pages/loginAccount.css';
+import '../pages/LoginAccount.css';
 import { Link, useNavigate } from 'react-router-dom';
-const LoginAccount = () => {
+const LoginAccount = () => {  
   const navigate = useNavigate();
   return (
     <div  className='loginAccount_container'>

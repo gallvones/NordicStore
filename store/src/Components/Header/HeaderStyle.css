@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    /*max-width: 700px;*/
     position:fixed;
     z-index: 1000; 
     gap: 3%;
@@ -13,12 +14,12 @@
     flex-direction: column;
     justify-content: center; 
     align-items: center; 
-    height: 200px;
+    height: 180px;
 }
 
 .logo >img {
-width: 200px;
-height: 130px;
+width: 170px;
+height: 110px;
 
 
 }
@@ -30,16 +31,19 @@ height: 130px;
     align-items: center;
     right: 50px; /* Coloca os ícones no final da página */
     gap: 1% ;
-    margin-left: 1%;
+    margin-left: 5%;
     
     
+}
+.icons > div{
+    margin-left: 18%;
 }
 
 .anchors{
     display:flex;
     align-items: center;
     justify-content: center;
-    margin-left: 1%;
+    margin-left: 2%;
 }
 
 .items_anchors{
@@ -59,6 +63,7 @@ height: 130px;
 cursor: pointer;
 }
 .name{
-    font-size: 25px;
+    font-size: 22px;
     color: rgba(138, 194, 207, 1);
 }
+

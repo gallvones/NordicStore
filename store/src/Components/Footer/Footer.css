@@ -1,0 +1,114 @@
+.all_footer{
+    display: flex;
+    flex-direction: column;
+
+   
+}
+
+.container_footer {
+    display: flex;
+    color: #f1f1f1;
+   gap: 10%;
+   margin: 2%;
+   margin-left: 6%;
+   margin-right: 6%;
+   letter-spacing: 2px;
+}
+
+/* First List*/
+.list1_footer > div >h2 {
+    font-size:1.7rem;
+    margin-bottom: 0.8rem;
+}
+.link_aboutUs {
+    font-size: 1rem;
+    color: rgba(138, 194, 207, 1);
+    cursor: pointer;
+}
+.list1_footer > div >p {
+    font-size:0.9rem;
+    color: #c9c7c7;
+    margin-top: 6%;
+    
+}
+
+/* Second List*/
+.list2_footer > div >h2 {
+    font-size:1.7rem;
+    margin-bottom: 0.8rem;
+}
+.list2_footer > div >p {
+    font-size:0.9rem;
+    color: #c9c7c7;
+    margin-top: 6%;
+    
+}
+
+/* Third List*/
+
+.list3_footer > div {
+    display: flex;
+    
+}
+.list3_footer > div >h2 {
+    font-size:1.7rem;
+    margin-bottom: 0.8rem;
+}
+.list3_footer > div > p {
+    font-size:0.9rem;
+    color: #c9c7c7;
+    margin-top: 3%;
+    
+}
+
+/* Fourd List*/
+.list4_footer > div{
+    display: flex;
+}
+.list4_footer > div >h2 {
+    font-size:1.7rem;
+    margin-bottom: 0.8rem;
+}
+.list4_footer > div > p {
+    font-size:0.9rem;
+    color: #c9c7c7;
+    margin-top: 3%;
+    
+    
+}
+.instaIcon_list4_footer{
+    margin-left: -4%;
+}
+.zapIcon_list4_footer{
+    margin-left: -2%;
+}
+
+.youtubeIcon_list4_footer{
+    margin-left: -13.5%;
+}
+
+.tiktokIcon_list4_footer{
+    margin-left: -13.5%;
+}
+/* Copyright List*/
+.container_copyright{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    background-color: rgb(66, 91, 98);
+    color: #f1f1f1;
+    letter-spacing: 2px;
+}
+.container_copyright > h2 {
+    color: rgba(138, 194, 207, 1);
+    font-size:1.1rem ;
+    background-color: rgb(66, 91, 98);
+    margin-left: 0.5%;
+}
+.container_copyright >p {
+    margin-left: 0.5%;
+    background-color: rgb(66, 91, 98);
+ font-size: 0.9rem;
+ color: #c9c7c7;
+}

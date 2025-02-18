@@ -1,13 +1,13 @@
 import React from 'react';
 import './HeaderStyle.css';
 import Logo from '../img/logo3.png';
-import CartButton from '../CartButton/CartButton';
-import Instagram from '../Instagram/Instagram';
-import Mail from '../Mail/Mail';
-import Login from '../Login/Login.jsx';
-
+import CartButton from '../../Icons/CartButton/CartButton.jsx';
+import Instagram from '../../Icons/Instagram/Instagram.jsx';
+import Login from '../../Icons/Login/Login.jsx'
+import Whatsapp from '../../Icons/Whatsapp/Whatsapp.jsx';
 const Header = () => {
   return (
+
     <div className='header_container'>
     <div className='logo'>
         <img src= {Logo} alt='logo-print' />
@@ -25,12 +25,14 @@ const Header = () => {
 
     </div>
     <div className='icons'>
-      <div><Instagram/></div>
       <div><Login/></div>
-      <div><Mail/></div>
+      <div><Instagram/></div>
+      <div><Whatsapp/></div>
       <div><CartButton/></div>
     </div>
+
     </div>
+    
     
   )
 }

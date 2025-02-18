@@ -11,7 +11,7 @@
     position: absolute; 
     top: 50%; 
     left: 50%; 
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);  /*Move o elemento 50% para a esquerda e 50% para cima em relação ao seu próprio tamanho. Isso compensa o fato de que top: 50% e left: 50% posicionam o canto superior esquerdo do elemento no centro, e não o centro do elemento.*/
 }
 
 .loginForms_container{

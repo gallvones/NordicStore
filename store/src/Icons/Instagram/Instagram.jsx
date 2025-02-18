@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaInstagram } from "react-icons/fa";
-import '../Instagram/Instagram.css';
+import './Instagram.css';
 const Instagram = () => {
   return (
     <div className='instagram-icon'>

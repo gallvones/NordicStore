@@ -1,4 +1,4 @@
-.mail-icon{
+.tiktok-icon{
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -13,7 +13,7 @@
     cursor:pointer;
 }
 
-.mail-icon:hover{
+.tiktok-icon:hover{
     color: rgba(138, 194, 207, 1);
     
 }
