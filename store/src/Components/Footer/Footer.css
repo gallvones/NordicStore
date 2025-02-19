@@ -15,8 +15,68 @@
    letter-spacing: 2px;
 }
 
-/* First List*/
+
+/* FirstList*/
+
+.list1_footer > div {
+    display: flex;
+    
+}
 .list1_footer > div >h2 {
+    font-size:1.7rem;
+    margin-bottom: 0.8rem;
+}
+.list1_footer > div > p {
+    font-size:0.9rem;
+    color: #c9c7c7;
+    margin-top: 3%;
+    
+}
+
+/* Second List*/
+.list2_footer > div{
+    display: flex;
+}
+.list2_footer > div >h2 {
+    font-size:1.7rem;
+    margin-bottom: 0.8rem;
+}
+.list2_footer > div > p {
+    font-size:0.9rem;
+    color: #c9c7c7;
+    margin-top: 3%;
+    
+    
+}
+.instaIcon_list2_footer{
+    margin-left: -4%;
+}
+.zapIcon_list2_footer{
+    margin-left: -2%;
+}
+
+.youtubeIcon_list2_footer{
+    margin-left: -13.5%;
+}
+
+.tiktokIcon_list2_footer{
+    margin-left: -13.5%;
+}
+
+/* Third List*/
+.list3_footer > div >h2 {
+    font-size:1.7rem;
+    margin-bottom: 0.8rem;
+}
+.list3_footer > div >p {
+    font-size:0.9rem;
+    color: #c9c7c7;
+    margin-top: 6%;
+    
+}
+
+/* Fourd_list*/
+.list4_footer > div >h2 {
     font-size:1.7rem;
     margin-bottom: 0.8rem;
 }
@@ -25,71 +85,13 @@
     color: rgba(138, 194, 207, 1);
     cursor: pointer;
 }
-.list1_footer > div >p {
+.list4_footer > div >p {
     font-size:0.9rem;
     color: #c9c7c7;
     margin-top: 6%;
     
 }
 
-/* Second List*/
-.list2_footer > div >h2 {
-    font-size:1.7rem;
-    margin-bottom: 0.8rem;
-}
-.list2_footer > div >p {
-    font-size:0.9rem;
-    color: #c9c7c7;
-    margin-top: 6%;
-    
-}
-
-/* Third List*/
-
-.list3_footer > div {
-    display: flex;
-    
-}
-.list3_footer > div >h2 {
-    font-size:1.7rem;
-    margin-bottom: 0.8rem;
-}
-.list3_footer > div > p {
-    font-size:0.9rem;
-    color: #c9c7c7;
-    margin-top: 3%;
-    
-}
-
-/* Fourd List*/
-.list4_footer > div{
-    display: flex;
-}
-.list4_footer > div >h2 {
-    font-size:1.7rem;
-    margin-bottom: 0.8rem;
-}
-.list4_footer > div > p {
-    font-size:0.9rem;
-    color: #c9c7c7;
-    margin-top: 3%;
-    
-    
-}
-.instaIcon_list4_footer{
-    margin-left: -4%;
-}
-.zapIcon_list4_footer{
-    margin-left: -2%;
-}
-
-.youtubeIcon_list4_footer{
-    margin-left: -13.5%;
-}
-
-.tiktokIcon_list4_footer{
-    margin-left: -13.5%;
-}
 /* Copyright List*/
 .container_copyright{
     display: flex;
