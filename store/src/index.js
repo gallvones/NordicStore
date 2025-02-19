@@ -9,6 +9,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginAccount from './pages/LoginAccount.jsx';
 import RegisterAccount from './pages/RegisterAccount.jsx';
 import AboutUs from './pages/AboutUs.jsx';
+import Section1P from './pages/SectionsPages/Section1P.jsx';
+import Section2P from '../src/pages/SectionsPages/Section2P.jsx';
+import Section3P from '../src/pages/SectionsPages/Section3P.jsx';
+
 
 
  const router = createBrowserRouter([
@@ -19,7 +23,7 @@ element: <App/>
   },
   {
    path: "login",
-   element: <LoginAccount/>,
+   element: <LoginAccount/>
   },
   {
     path: "register",
@@ -28,8 +32,21 @@ element: <App/>
   {
     path: "aboutUs",
     element: <AboutUs/>
+  },
+  {
+    path: "section1",
+    element: <Section1P/>
+  },
+  {
+    path: "section2",
+    element: <Section2P/>
+  },
+  {
+    path: "section3",
+    element: <Section3P/>
   }
- ])
+ ]);
+ 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

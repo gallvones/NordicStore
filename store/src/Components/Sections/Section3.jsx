@@ -6,6 +6,7 @@ import Flu1 from"../img/Fluminense1.jpeg";
 import Flu2 from "../img/Fluminense2.jpeg";
 import Flu3 from "../img/Fluminense3.jpeg";
 import Flu4 from"../img/Fluminense4.jpeg";
+import { Link } from 'react-router-dom';
 
 const Section3 = () => {
   return (
@@ -17,7 +18,7 @@ const Section3 = () => {
           <Item3 ItemValues={{ img: Flu4, price: 'R$200', title:'  Tricolor 2023'}} />
           </div>
   <div className="btn_container2">
-          <SectionButton link= ""  title= "Blusas de time"/>
+          <Link to='section3'><SectionButton title= "Blusas de time"/></Link>
           
       </div>
       </div>

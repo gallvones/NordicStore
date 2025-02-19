@@ -1,13 +1,13 @@
 import React from 'react';
 import '../Sections/SectionButton.css';
 
-const SectionButton = ({ link, title }) => {
+const SectionButton = ({ title }) => {
 
   return (
     <div className='all_space'> 
-    <a href={link} className='link_btn'>
+    <div className='link_btn'>
         <button className='btn'> Ver mais {title}</button>
-        </a>
+        </div>
     </div>
   )
 }
