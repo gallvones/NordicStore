@@ -22,7 +22,6 @@ const imgs = [
 
   return (
     <div className='slide'>
-      <hr/>
       <br/>
       <br/>
         <Swiper

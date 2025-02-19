@@ -1,11 +1,16 @@
+.all_header{
+    display: flex;
+    flex-direction: column;
+}
 .header_container {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     /*max-width: 700px;*/
-    position:fixed;
-    z-index: 1000; 
+    height:20vh;
+    max-height: 20h;
+    z-index: 1000;
     gap: 3%;
 }
 

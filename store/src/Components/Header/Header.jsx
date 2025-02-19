@@ -7,7 +7,7 @@ import Login from '../../Icons/Login/Login.jsx'
 import Whatsapp from '../../Icons/Whatsapp/Whatsapp.jsx';
 const Header = () => {
   return (
-
+    <div className='all_header'>
     <div className='header_container'>
     <div className='logo'>
         <img src= {Logo} alt='logo-print' />
@@ -30,9 +30,10 @@ const Header = () => {
       <div><Whatsapp/></div>
       <div><CartButton/></div>
     </div>
-
-    </div>
     
+    </div>
+    <hr />
+    </div>
     
   )
 }

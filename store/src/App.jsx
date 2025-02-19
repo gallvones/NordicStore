@@ -22,7 +22,6 @@ function App() {
     <Header/> 
     </div>
     <div className="Body">
-      <hr/>
     <SlideShow/>
     <hr/>
     <Section1/>
