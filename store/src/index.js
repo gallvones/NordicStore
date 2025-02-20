@@ -22,27 +22,27 @@ path:"/",
 element: <App/>
   },
   {
-   path: "login",
+   path: "/login",
    element: <LoginAccount/>
   },
   {
-    path: "register",
+    path: "/register",
     element: <RegisterAccount/>
   },
   {
-    path: "aboutUs",
+    path: "/aboutUs",
     element: <AboutUs/>
   },
   {
-    path: "section1",
+    path: "/section1",
     element: <Section1P/>
   },
   {
-    path: "section2",
+    path: "/section2",
     element: <Section2P/>
   },
   {
-    path: "section3",
+    path: "/section3",
     element: <Section3P/>
   }
  ]);

@@ -16,8 +16,8 @@ const CardProduct = ({data}) => {
     className='Card' >
       <img src= {currentImg} className='card__image'  alt=""></img>
       <div className='card__info'>
-      <h1 className='card__price'>  {price} </h1>
       <h1 className='card__title'> {title}</h1>
+      <h1 className='card__price'>  {price} </h1>
       </div>
       <button type = 'button' className='add__cart'> <BsFillCartPlusFill/></button>
     </section>

@@ -6,7 +6,7 @@ const Login = () => {
   
   return (
     <div className='login_icon' >
-      <Link to = "login"><IoPerson/></Link>
+      <Link to = "/login"><IoPerson/></Link>
       </div>
   )
 }

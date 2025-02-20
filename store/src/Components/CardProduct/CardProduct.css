@@ -1,62 +1,68 @@
 .Card{
     width: 100%;
-    max-width: 300px;
-    background-color: rgb(0, 0, 0);
+    width: 220px;
+    height: 390px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
     margin: 0 auto;
     position: relative;
-    
+    border-radius: 20px;
 }
 
 .card__image{
     width: 100%;
-    width: 300px;
-    height: 400px;
+    width: 220px;
+    height: 310px;
+    border-radius: 20px;
+    
 }
 
 .card__info{
-    padding: 10px;
-    border-top: 1px solid rgb(0, 0, 0);
+    margin: 2%;
+    border-radius: 20px;
 }
 
 .card__price{
-    font-size: 25px;
+    font-size: 20px;
     display: block;
-    color: #fdff00;
+    color: #f1f1f1;
+    
 }
 
 .card__title {
-    font-size: 17px;
+    font-size: 15px;
     line-height: 1.5;
     color: rgb(205, 204, 204);
     font-weight: 500;
-    margin-top: 5px;
+    
 }
 
 .add__cart {
+display: none;
 position: absolute;
 right: 0;
 bottom: 0;
 width: 45px;
 height: 45px;
-margin: 15px;
-color: rgb(227, 227, 3);
-display: none;
+color: #f1f1f1;
+margin-bottom: 5%;
+margin-right: 3%;
 align-items: center;
 justify-content: center;
-border: none;
+border-color: rgba(138, 194, 207, 1);
 border-radius: 50px;
-background-color: rgb(30, 30, 30);
 font-size: 1.5rem;
 cursor: pointer;
 }
 
 .Card:hover {
-box-shadow: 0 2px 10px rgb(227, 227, 1);
+    box-shadow: 0 0 10px 4px rgba(138, 194, 207, 1);
+cursor: pointer;
 }
 
+/* Mesmo com o display:none, o carrinho aparece quando o hover é acionado, por conta deste novo display. */
 .Card:hover .add__cart {
-    display: flex;
+    display:block;
+    color: rgba(138, 194, 207, 1);
 }

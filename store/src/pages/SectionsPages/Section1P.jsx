@@ -1,8 +1,8 @@
 import React from 'react'
 import '../SectionsPagesStyles/Section1P.css'
 import Header from '../../Components/Header/Header'
-import SrcBar from '../../Icons/SrcBar/SrcBar'
-
+import SrcBar from '../../Components/SrcBar/SrcBar'
+import Footer from '../../Components/Footer/Footer'
 const Section1P = () => {
     
   return (
@@ -12,12 +12,9 @@ const Section1P = () => {
 <div className='filterContent_Section1P'>
 <SrcBar/>
 </div>
-
-
-
-
+<hr />
+<Footer/>
 </div>
-
     </div>
   )
 }
