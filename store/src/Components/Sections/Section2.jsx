@@ -15,7 +15,7 @@ const Section2 = () => {
           <Item2 ItemValues={{ img: Tenis, price: 'R$200', title:'  Air Jordan Bege'}} />
           </div>
   <div className="btn_container2">
-          <Link to='section2'><SectionButton  title= "Tenis"/></Link>
+          <Link to='section2'><SectionButton/></Link>
           
       </div>
       </div>

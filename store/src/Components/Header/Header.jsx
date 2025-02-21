@@ -20,9 +20,9 @@ const Header = () => {
     </Link>
     <div className='anchors'>
     <div className='items_anchors'>
-        <div>Camisetas</div>
-        <div>Tenis</div>
-        <div>Bermudas</div>
+        <div><Link to='/section1'>Camisetas</Link></div>
+        <div><Link to='/section2'>Tenis</Link></div>
+        <div><Link to='/section3'>Bermudas</Link></div>
         </div>
 
     </div>

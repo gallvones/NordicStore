@@ -1,20 +1,20 @@
-.all__cards{
+.all__cards2{
     display: flex;
     flex-direction: column;
     gap: 3%;
 }
-.cards_container{
+.cards2_container{
     display: flex;
     gap: 5% ;
 }
 
-.buttons_change{
+.buttons2_change{
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4%;
 }
-.prev_cardProducts{
+.prev_cardProducts2{
 font-size: 0.8rem;
 border: solid 3px rgba(94, 128, 137, 1); 
 border-radius: 30px;
@@ -27,11 +27,13 @@ color: white;
 white-space: nowrap;
 
 }
-.prev_cardProducts:hover{
+
+.prev_cardProducts2:hover {
     background-color: rgba(138, 194, 207, 1);
     color: black;
 }
-.next_cardProducts{
+
+.next_cardProducts2{
     font-size: 0.8rem;
     border: solid 3px rgba(94, 128, 137, 1); 
     border-radius: 30px;
@@ -43,7 +45,8 @@ white-space: nowrap;
     color: white;
     white-space: nowrap;
 }
-.next_cardProducts:hover{
+.next_cardProducts2:hover{
     background-color: rgba(138, 194, 207, 1);
     color: black;
 }
+

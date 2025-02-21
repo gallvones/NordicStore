@@ -1,20 +1,20 @@
-.all__cards{
+.all__cards3{
     display: flex;
     flex-direction: column;
     gap: 3%;
 }
-.cards_container{
+.cards3_container{
     display: flex;
     gap: 5% ;
 }
 
-.buttons_change{
+.buttons3_change{
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4%;
 }
-.prev_cardProducts{
+.prev_cardProducts3{
 font-size: 0.8rem;
 border: solid 3px rgba(94, 128, 137, 1); 
 border-radius: 30px;
@@ -25,13 +25,14 @@ justify-content: center;
 cursor: pointer;
 color: white;
 white-space: nowrap;
-
 }
-.prev_cardProducts:hover{
+
+.prev_cardProducts3:hover {
     background-color: rgba(138, 194, 207, 1);
     color: black;
 }
-.next_cardProducts{
+
+.next_cardProducts3{
     font-size: 0.8rem;
     border: solid 3px rgba(94, 128, 137, 1); 
     border-radius: 30px;
@@ -43,7 +44,8 @@ white-space: nowrap;
     color: white;
     white-space: nowrap;
 }
-.next_cardProducts:hover{
+.next_cardProducts3:hover{
     background-color: rgba(138, 194, 207, 1);
     color: black;
 }
+

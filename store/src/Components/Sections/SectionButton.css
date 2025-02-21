@@ -6,16 +6,18 @@ padding: 2%;
 .btn{
 font-size: 1rem;
 width: 100%;
+min-width: 100px;
 height: 4vh;
 border: solid 3px rgba(94, 128, 137, 1); 
 border-radius: 30px;
-padding: 8%;
 display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
 color: white;
 font-weight: bold;
+white-space: nowrap;
+
 }
 
 .btn:hover {

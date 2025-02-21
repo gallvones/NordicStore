@@ -15,7 +15,7 @@
     width: 220px;
     height: 310px;
     border-radius: 20px;
-    
+    object-fit: cover;  /* Esse comando aqui renderiza a imagem sem deixar ela esticada. Assim, pode ficar um pouco cortada, mas fica bem mais bonito. */
 }
 
 .card__info{

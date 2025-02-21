@@ -10,9 +10,11 @@ import B4f from '../img/b4f.png';
 import B4c from '../img/b4c.png';
 import '../Sections/Section1.css';
 import SectionButton from './SectionButton';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 const Section1 = () => {
+
+
   return (
     <div className= 'all_elements'>
     <div className='all_items'>
@@ -24,10 +26,10 @@ const Section1 = () => {
        
 
     </div>
-    <div className= 'btn_container'>
-    <Link to='section1'><SectionButton title='Camisetas' /></Link>
-       {/* A minha intencao com a props link, era passar uma outra página. Como deu erro, eu descobri que preciso aprender sobre rotas, primeiramente. Teria alguma forma de utilizar a props para fazer isso? */}
-       </div>
+    <div className= 'btn_container' >
+    <Link to='/section1'> <SectionButton/> </Link>
+    </div>
+       
     </div>
   )}
 

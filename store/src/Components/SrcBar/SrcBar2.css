@@ -1,0 +1,70 @@
+.all_srcbar2 {
+    display: flex;
+    border: solid 1px rgba(94, 128, 137, 1); 
+    border-radius: 20px;
+    margin: 4.5%;
+    height: 110vh;
+}
+.srcbar2_container  {
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.srcbar2_header{ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px rgba(94, 128, 137, 1); 
+    border-radius: 20px;
+    padding: 1%;
+    width: 25vh;
+    height: 5vh;
+    margin-top: 10%;
+}
+
+.icon2_src{
+    margin-left: -5%;
+    margin-top: 6%;
+   background: none;
+    height: 5vh;
+    width: 5vh;
+    font-size: 33px;
+    color: white;
+    cursor: pointer;
+}
+
+.inputsrc2 > input {
+border: none;
+text-decoration: none;
+outline: none;
+ height: 3vh;
+ width: 17vh;
+ font-size: 18px;
+color: #f1f1f1;
+
+}
+
+.anuncio2_container{
+    margin-top: 20%;
+    border: solid 2px rgba(94, 128, 137, 1); 
+    border-radius: 20px;
+    height: 93vh;
+    padding: 1%;
+}
+.anuncio2_image {
+    width: 100%; 
+    border: solid 2px rgba(94, 128, 137, 1); 
+    border-radius: 10px;
+    display: block;
+    height: 30.5vh;
+    
+}
+
+.cardproducts2_allcontainer{
+    margin: 4%;
+    margin-top: 4%;
+    display: flex;
+    flex-direction: column;
+    
+}

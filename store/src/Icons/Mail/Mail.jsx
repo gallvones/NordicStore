@@ -4,7 +4,7 @@ import '../Mail/Mail.css';
 const Mail = () => {
   return (
     <div className='mail-icon'>
-        <MdOutlineMail/>
+        <MdOutlineMail />
     </div>
   )
 }
