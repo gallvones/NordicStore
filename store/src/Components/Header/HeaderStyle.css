@@ -1,7 +1,4 @@
-.all_header{
-    display: flex;
-    flex-direction: column;
-}
+
 .header_container {
     display: flex;
     align-items: center;
@@ -9,9 +6,7 @@
     width: 100%;
     /*max-width: 700px;*/
     height:20vh;
-    max-height: 20h;
-    z-index: 1000;
-    gap: 3%;
+    
 }
 
 .logo {
@@ -28,27 +23,16 @@ height: 110px;
 
 
 }
-
-
-.icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: 50px; /* Coloca os ícones no final da página */
-    gap: 1% ;
-    margin-left: 5%;
-    
-    
-}
-.icons > div{
-    margin-left: 18%;
+.name{
+    font-size: 22px;
+    color: rgba(138, 194, 207, 1);
 }
 
 .anchors{
     display:flex;
     align-items: center;
     justify-content: center;
-    margin-left: 2%;
+    margin-left: 20px;
 }
 
 .items_anchors{
@@ -56,7 +40,7 @@ height: 110px;
     align-items: center;
     justify-content: center;
     color: #f1f1f1;
-    gap: 10%;
+    gap: 35px   ;
     font-size:1.5rem;
     letter-spacing: 3px;
     
@@ -67,8 +51,13 @@ height: 110px;
     color: rgba(138, 194, 207, 1);
 cursor: pointer;
 }
-.name{
-    font-size: 22px;
-    color: rgba(138, 194, 207, 1);
+
+.icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px ;
+    margin-left: 50px;
+    
 }
 
