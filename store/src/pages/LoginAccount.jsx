@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from '../Components/img/logo3.png';
-import '../pages/LoginAccount.css';
+import '../pages/loginAccount.css';
 import { Link, useNavigate } from 'react-router-dom';
 const LoginAccount = () => {  
   const navigate = useNavigate();
