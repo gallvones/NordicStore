@@ -5,7 +5,7 @@ const FormDataSchemaRegister = new mongoose.Schema({
     surname: String,
     phone: String,
     cep: String,
-    mail: String,
+    mail: {type: String, unique: true},
     password: String,
 }, {collection: 'Register'});
 
