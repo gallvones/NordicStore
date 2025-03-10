@@ -1,52 +1,77 @@
 const express = require('express');
-const mysql = require('mysql2');
+const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
 const cors = require('cors');
 const app = express();
 const port = 3001;
+require('dotenv').config();
 
+const username = process.env.MONGODB_USERNAME;
+const password = process.env.MONGODB_PASSWORD;
+const usernameGmail= process.env.GMAIL_USERNAME;
+const passwordGmail = process.env.PASSWORD_USERNAME;
 // Middleware para permitir requisições JSON e CORS
 app.use(express.json());
 app.use(cors());
 
-// Configuração da conexão com o MySQL
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root', 
-  password: 'Galvao2003?', 
-  database: 'nordic_store' 
+
+// DB connect
+const connectToDataBase = async () => {
+  try {
+      await mongoose.connect(`mongodb+srv://${username}:${password}@nodetest.n0wqc.mongodb.net/NordicStore?retryWrites=true&w=majority&appName=NodeTest`);
+      console.log('Conexão com o banco bem sucedida!');
+  } catch (error) {
+      console.error('Ocorreu um erro ao conectar com o banco de dados:', error);
+  }
+};
+connectToDataBase();
+
+//The model of documents (register.jsx)
+const FormDataRegister = require('./FormDataRegister')
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail', 
+  auth: {
+      user: usernameGmail, 
+      pass: passwordGmail, 
+  },
 });
 
-// COnexão com o sql
-connection.connect((err) => {
-  if (err) {
-    console.error('Erro ao conectar ao MySQL:', err);
-    return;
-  }
-  console.log('Conectado ao MySQL!');
-});
+
 
 // Rota definida
-app.post('/cadastrar', (req, res) => {
-  const { nome, sobrenome, telefone, cep, email, senha } = req.body;
+app.post('/cadastrar',  async(req, res) => {
+  try{
+  const { name, surname, phone, cep, mail, password } = req.body;
+  
+  // New document on MongoDB
+  const initDocument = new FormDataRegister({name, surname, phone, cep, mail, password});
+  await initDocument.save(); // Save on DB
 
-  const query = `
-    INSERT INTO users_register (name, surname, tel, cep, mail, password)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `;
-
-  connection.query(
-    query,
-    [nome, sobrenome, telefone , cep, email, senha],
-    (err, results) => {
-      if (err) {
-        console.error('Erro ao cadastrar usuário:', err);
-        res.status(500).send('Erro no servidor');
-        return;
-      }
-      res.status(200).send('Usuário cadastrado com sucesso!');
-    }
-  );
+  const mailOptions = {
+    from: usernameGmail, 
+    to: usernameGmail, 
+    subject: `New register on Nordic! ${name} ${surname} just registered`, 
+    text: `
+         The number of the new client is ${phone}. The e-mail is ${mail}
+    `, 
+};
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+      console.error('Error to send the e-mail to Nordic Store inbox:', error); 
+  } else {
+      console.log('E-mail send to Nordic Store inbox!:', info.response); 
+  }
 });
+
+res.status(200).json({ message: 'Dados Salvo com sucesso!' });
+} 
+catch (error) {
+  console.error('Erro ao processar dados:', error);
+        res.status(500).json({ message: 'Erro ao processar dados' });
+}
+});
+  
 
 // Iniciar o servidor local 
 app.listen(port, () => {
