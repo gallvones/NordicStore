@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 // Servir arquivos estáticos do frontend (React)
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '../store/build')));
 
 // Rota padrão para o front end
 app.get('*', (req, res) => {
