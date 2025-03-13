@@ -25,7 +25,7 @@ const RegisterAccount = () => {
  
 
     try {
-      const response = await fetch('http://nordic-store.onrender.com/cadastrar', {
+      const response = await fetch('https://nordic-store.onrender.com/cadastrar', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
