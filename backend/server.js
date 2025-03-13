@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 const port = 3001;
 require('dotenv').config();
@@ -14,6 +15,13 @@ const passwordGmail = process.env.PASSWORD_USERNAME;
 app.use(express.json());
 app.use(cors());
 
+// Servir arquivos estáticos do frontend (React)
+app.use(express.static(path.join(__dirname, '../build')));
+
+// Rota padrão para o front end
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
 
 // DB connect
 const connectToDataBase = async () => {
