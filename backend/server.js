@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 // Rota padrão para o front end
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../store/biuld', 'index.html'));
+  res.sendFile(path.join(__dirname, '../store/build', 'index.html'));
 });
 
 // DB connect
