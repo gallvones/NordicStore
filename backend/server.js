@@ -13,7 +13,11 @@ const usernameGmail= process.env.GMAIL_USERNAME;
 const passwordGmail = process.env.PASSWORD_USERNAME;
 // Middleware para permitir requisições JSON e CORS
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://nordic-store.onrender.com', // Permitir apenas requisições deste domínio
+  methods: ['GET', 'POST'], // Permitir apenas métodos GET e POST
+  credentials: true // Permitir cookies e autenticação
+}));
 
 // Servir arquivos estáticos do frontend (React)
 app.use(express.static(path.join(__dirname, '../store/build')));
