@@ -7,10 +7,11 @@ const app = express();
 const port = 3001;
 require('dotenv').config();
 
-const username =MONGODB_USERNAME;
-const password =MONGODB_PASSWORD;
-const usernameGmail=GMAIL_USERNAME;
-const passwordGmail =PASSWORD_USERNAME;
+const username = process.env.MONGODB_USERNAME;
+const password = process.env.MONGODB_PASSWORD;
+const usernameGmail = process.env.GMAIL_USERNAME;
+const passwordGmail = process.env.PASSWORD_USERNAME;
+
 // Middleware para permitir requisições JSON e CORS
 app.use(express.json());
 app.use(cors({
