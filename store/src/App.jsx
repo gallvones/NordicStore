@@ -16,7 +16,7 @@ function App() {
     <Provider>
     <div className="Aplication">
       <div className="MenuCart_Suspended">
-<CartMenu/>
+<CartMenu />
       </div>
     <div className="Header">
     <Header/> 

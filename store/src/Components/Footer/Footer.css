@@ -40,6 +40,9 @@
     color: white;
     cursor:pointer;
 }
+.zapIcon_list1_footer:hover{
+    color: rgba(138, 194, 207, 1);
+}
 
 
 /* Second List*/
@@ -73,6 +76,9 @@
     margin-left: -4%;
     color: white;
     cursor:pointer;
+}
+.zapIcon_list2_footer:hover{
+    color: rgba(138, 194, 207, 1);
 }
 
 .youtubeIcon_list2_footer{
