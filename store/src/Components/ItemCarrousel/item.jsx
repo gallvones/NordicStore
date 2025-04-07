@@ -5,6 +5,7 @@ const Item = ({ItemValues}) => {
 const {img,price,img2,title} = ItemValues;
 const [currentImg, setCurrentImg] = useState(img);
 
+
   return (
     <div className="container">
     <div 

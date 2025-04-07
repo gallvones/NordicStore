@@ -6,6 +6,7 @@ color: String,
 size: String,
 brand: String,
 amount: Number,
+price: String,
 img1: String,
 img2: String,
 }, {collection: 'Shirts'});
