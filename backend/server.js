@@ -79,6 +79,17 @@ app.get('/allshirts', async (req, res) => {
   }
 });
 
+//Rota para pegar usuários registrados
+app.get('/allUsers', async (req, res) => {
+try{
+  const users =  await FormDataRegister.find({}, 'mail password');
+  res.status(200).json(users);
+} catch (error){
+  console.error('Erro ao buscar usuários:', error);
+  res.status(500).json({ message: 'Erro ao buscar dados'});
+}
+});
+
 // rota para inserir dados do formulario de registro
 app.post('/cadastrar', async (req, res) => {
   try {

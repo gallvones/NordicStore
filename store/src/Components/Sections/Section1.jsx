@@ -79,8 +79,9 @@ const Section1 = () => {
   );
 
   return (
-    <div className='all_elements'>
-      <div className='all_items'>
+    <div className='all-elements'>
+<div className='section1-title'> <p> Destaques</p></div>
+      <div className='all-items'>
         {shirts.length > 0 ? (
           shirts.map((shirt) => (
             <Item 
@@ -89,8 +90,9 @@ const Section1 = () => {
                 img: shirt.img1, 
                 img2: shirt.img2 || shirt.img1, // Fallback para img2
                 title: shirt.description, 
-                price: `R$ ${shirt.price}`,
-                brand: shirt.brand || ''
+                price: `${shirt.price}`,
+                brand: shirt.brand || '',
+                size: shirt.size
               }} 
             />
           ))
