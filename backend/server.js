@@ -6,6 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 const port = 3001;
+const jwtModules = require ('../backend/jwt');
 require('dotenv').config();
 
 // Minhas credenciais
@@ -89,6 +90,23 @@ try{
   res.status(500).json({ message: 'Erro ao buscar dados'});
 }
 });
+
+app.post('/usertoken', async (req, res) => {
+  try{
+    const {userWithoutPassword} = req.body;
+    const user = await FormDataRegister.findOne({ mail: userWithoutPassword.mail});
+    if(!user) {
+      return res.status(404).json({error: 'E-mail não cadastrado!'});
+    }
+
+const token =  jwtModules.sign({userId: user._id, userWithoutPassword: user.mail})
+res.json({ token, user: { id: user._id, email: user.mail}});
+  } catch(error){
+console.error('Erro no servidor:', error);
+res.status(500).json({error: 'Erro interno no servidor.'});
+  }
+});
+
 
 // rota para inserir dados do formulario de registro
 app.post('/cadastrar', async (req, res) => {

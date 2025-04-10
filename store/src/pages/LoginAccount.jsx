@@ -31,10 +31,25 @@ const LoginAccount = () => {
         throw  errorPassword;
         
       } 
-
-      // 4. Login bem-sucedido
-      localStorage.setItem('loggedUser', JSON.stringify(documentMDB));
-      navigate('/'); // Redireciona para a página inicial
+      const { password:pwdFromDb, ...userWithoutPassword } = documentMDB; // Remove o campo 'password'
+      const userMail = await fetch ('http://localhost:3001/usertoken', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({userWithoutPassword})
+      });
+      if(userMail.ok){
+       const {token, user} = await userMail.json();
+       localStorage.setItem('authToken', token);
+       localStorage.setItem('user', JSON.stringify(user));
+       console.log(`${localStorage}`)
+       navigate('/');
+      } if (!userMail.ok) {
+        const err = await userMail.json();
+        throw new Error(err.error || 'Erro ao buscar usuários');
+      }
+      
 
     } catch (error) {
       setError(error.message);
