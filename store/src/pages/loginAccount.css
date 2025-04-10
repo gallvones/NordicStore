@@ -1,7 +1,9 @@
 .loginAccount_container{
    width: 80%;
     max-width: 500px; 
-   height: 60%;
+   height: 600px;
+   min-height: 600px;
+   max-height: 600px;
     margin: auto;
     border: solid 3px rgba(94, 128, 137, 1); 
     border-radius: 50px; 
@@ -31,12 +33,21 @@
     color: rgba(138, 194, 207, 1);
 }
 
+.error-message{
+    color: rgb(255, 80, 80);
+    font-size: 1.1rem;
+    margin-top: 10px;
+    
+}
+
 .formsLogin_list{
+    display: flex;
+    flex-direction: column;
     margin-top:  1%;
     
 }
 .formsLogin_list > input {
-    width: 70%;
+    width: 300px;
     border: solid 2px rgba(94, 128, 137, 1); 
     border-radius: 10px;
     color: white;
@@ -62,20 +73,40 @@
     color: black;
 }
 
+.links-pages-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.recovery-password{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+}
+.link-recovery-password{
+    color: rgba(138, 194, 207, 1);
+    cursor: pointer;
+}
+.link-recovery-password:hover{
+    font-size: 1.15rem;
+}
 .register_page{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 4%;
+    margin-top: 15px;
     font-size: 1.1rem;
     color: white;
 }
+
 .register_link{
     color:rgba(138, 194, 207, 1);
     margin-left: 1%;
     cursor: pointer;
 }
 .register_link:hover {
-    font-weight: bold;
+    font-size: 1.15rem;
 }
 

@@ -19,23 +19,27 @@ const LoginAccount = () => {
       const users = await response.json();
 
       // 2. Verifica se existe um usuário com o email digitado
-      const user = users.find(user => user.mail === email);
-      if (!user) {
-        throw new Error('Email não cadastrado');
+      const documentMDB = users.find(user => user.mail === email);
+      if (!documentMDB ) {
+        const errorEmail = new Error ('Email não cadastrado');
+        throw errorEmail;
       }
 
       // 3. Compara a senha diretamente (sem bcrypt)
-      if (user.password !== password) {
-        throw new Error('Senha incorreta');
-      }
+      if (documentMDB.password !== password) {
+        const errorPassword = new Error('Senha incorreta!');
+        throw  errorPassword;
+        
+      } 
 
       // 4. Login bem-sucedido
-      localStorage.setItem('loggedUser', JSON.stringify(user));
+      localStorage.setItem('loggedUser', JSON.stringify(documentMDB));
       navigate('/'); // Redireciona para a página inicial
 
     } catch (error) {
       setError(error.message);
-      console.error('Erro no login:', error);
+      
+      
     }
   };
 
@@ -45,7 +49,7 @@ const LoginAccount = () => {
         <Link to='/'><img src={Logo} alt="logo" className='imgLogin_logo'/></Link>
         <h1 className='login_title'>Login</h1>
         
-        {error && <p style={{ color: 'red' }}> Credenciais incorretas!</p>}
+        {error && <p className='error-message'>{error}</p>}
 
         <div className='formsLogin_list'>
           <input 
@@ -66,9 +70,16 @@ const LoginAccount = () => {
         <button type="submit" className='submitLogin_button'>Enviar</button>
       </form>
       
+
+      
+      <div className='links-pages-container'>
+      <div className='recovery-password'>
+        <p>Esqueceu sua senha? <span className='link-recovery-password' onClick={() => navigate('/changePassword')}>Altere-a!</span></p>
+      </div>
       <div className='register_page'>
         Não tem uma conta?
         <p className='register_link' onClick={() => navigate('/register')}>Registre-se agora!</p>
+      </div>
       </div>
     </div>
   );

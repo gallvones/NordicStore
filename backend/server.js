@@ -97,6 +97,7 @@ app.post('/cadastrar', async (req, res) => {
     const initDocument = new FormDataRegister({ name, surname, phone, cep, mail, password });
     await initDocument.save();
 
+    // Message send to my email 
     const mailOptions = {
       from: usernameGmail,
       to: usernameGmail,
@@ -118,6 +119,54 @@ app.post('/cadastrar', async (req, res) => {
     res.status(500).json({ message: 'Erro ao processar dados' });
   }
 });
+
+// Rota para mensagem de código ao usuário mensagem personalizada
+app.post('/send-recovery-code', async (req, res) => {
+  const { email, code } = req.body;
+  
+  try {
+    // Verifica se o e-mail existe no banco 
+    const customer = await FormDataRegister.findOne({ mail: email });
+    if (!customer) {
+      return res.status(404).json({ message: 'E-mail não cadastrado' });
+    }
+
+    // Configura o e-mail para o usuário
+    const userMailOptions = {
+      from: process.env.usernameGmail,
+      to: email,
+      subject: 'Código de Recuperação - Nordic Store',
+      html: `
+        <h2>Recuperação de Senha</h2>
+        <p>Você solicitou a redefinição de senha na Nordic Store.</p>
+        <p>Seu código de verificação é: <strong>${code}</strong></p>
+        <p>Este código é válido por 10 minutos.</p>
+        <p>Caso não tenha solicitado esta alteração, ignore este e-mail.</p>
+      `,
+    };
+
+// Envia o e-mail
+transporter.sendMail(userMailOptions, (error, info) => {
+  if (error) {
+    console.error('Erro ao enviar código de recuperação:', error);
+    return res.status(500).json({ message: 'Falha ao enviar código' });
+  } else {
+    console.log('Código enviado para:', email, '| Info:', info.response);
+    return res.status(200).json({ 
+      message: 'Código enviado com sucesso',
+      
+    });
+  }
+});
+
+} catch (error) {
+console.error('Erro no processo de recuperação:', error);
+res.status(500).json({ message: 'Erro interno no servidor' });
+}
+});
+
+//rota para verificar o código
+
 
 // rota para inserir dados no banco das camisetas pelo postman 
 app.post('/shirts', async (req, res) => {

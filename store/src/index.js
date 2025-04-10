@@ -12,6 +12,8 @@ import AboutUs from './pages/AboutUs.jsx';
 import Section1P from './pages/SectionsPages/Section1P.jsx';
 import Section2P from '../src/pages/SectionsPages/Section2P.jsx';
 import Section3P from '../src/pages/SectionsPages/Section3P.jsx';
+import RecoveryPassword from './pages/RecoveryPassword/RecoveryPassword.jsx';
+import ResetPassword from './pages/ResetPassword/ResetPassword.jsx';
 
 
 
@@ -44,7 +46,14 @@ element: <App/>
   {
     path: "/section3",
     element: <Section3P/>
-  }
+  },
+  {
+  path: "/changePassword",
+  element: <RecoveryPassword/>
+}, {
+  path: "/resetPassword",
+  element: <ResetPassword/>
+}
  ]);
  
 const root = ReactDOM.createRoot(document.getElementById('root'));
