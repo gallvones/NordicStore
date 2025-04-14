@@ -32,34 +32,39 @@ const RecoveryPassword = () => {
         });
 
         const data = await response.json();
-
+        if(response.ok){
+            setSuccess('Um código de 6 dígitos foi enviado para seu e-mail! Verifique o Spam!');
+        }
         if (!response.ok) {
           throw new Error(data.message || 'Falha ao enviar código de recuperação');
         }
 
         setShowCodeInput(true);
-        setSuccess('Um código de 6 dígitos foi enviado para seu e-mail!');
-      } else {
-        // Fase 2: Verificação do código
-        const verifyResponse = await fetch('http://localhost:3001/verify-recovery-code', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            code: code
-          }),
-        });
+      } if(showCodeInput === true){
+  // Fase 2:  Amazenamento do código no Banco de dados
+  const codeTimer = Date.now() + 5 * 60 * 1000; // 5 minutos
+  const verifyResponse = await fetch('http://localhost:3001/insert-recovery-code', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: email,
+      code: code,
+      codeTimer: codeTimer
+    }),
+  });
 
-        const verifyData = await verifyResponse.json();
+  const verifyData = await verifyResponse.json();
 
-        if (!verifyResponse.ok) {
-          throw new Error(verifyData.message || 'Código inválido');
-        }
+  if (!verifyResponse.ok) {
+    throw new Error(verifyData.message || 'Código não enviado. Tente novamente.');
+  }}
+      else {
+      // Aqui eu vou inserir a verificacao do código preenchido e redirecionar o usuário para pagina de mudar senha, pelo naviagete
 
         // Redireciona para tela de nova senha
-        navigate('/resetPassword', { state: { email, token: verifyData.token } });
+        //navigate('/resetPassword', { state: { email, token: verifyData.token } });
       }
     } catch (error) {
       setError(error.message);

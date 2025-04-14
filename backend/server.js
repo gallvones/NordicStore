@@ -59,6 +59,7 @@ app.use(cors({
 // Modelos de documentos do DB
 const FormDataRegister = require('./FormDataRegister');
 const FormDataShirts = require('./FormDataShirts');
+const FormDataCodeRecoveryPassword = require('./FormDataCodesRecoveryPassword');
 
 // Configuração de e-mail 
 const transporter = nodemailer.createTransport({
@@ -184,7 +185,41 @@ res.status(500).json({ message: 'Erro interno no servidor' });
 });
 
 //rota para verificar o código
+app.post ( '/insert-recovery-code' ,async (req, res ) => {
+  const {email, code, codeTimer} = req.body;
 
+  try{
+    const insertCode = new FormDataCodeRecoveryPassword({ recoveryCode: code, recoveryCodeExpires: codeTimer, mail: email});
+    await insertCode.save();
+    res.status(200).json({message: 'Código armazenado com sucesso'});
+
+  } catch (error){
+    console.error('Erro no armazenamento do código de recuperação:', error);
+    res.status(500).json({ message: 'Erro com o banco de dados'});
+  }
+
+  });
+
+  app.post('/verify-recovery-code', async (req,res) => {
+    try{
+      const {code} = req.body
+      const checkCode = await FormDataCodeRecoveryPassword.findOne({ recoveryCode: code});
+      if(!checkCode){
+        return res.status(404).json({error: 'Código de confirmação incorreto!'});
+      } if(!checkCode.recoveryCodeExpires || checkCode.recoveryCodeExpires < Date.now() ){
+        return res.status(400).json({ error: 'Código expirado!' });
+      }
+      await FormDataCodeRecoveryPassword.updateOne(
+        { _id: checkCode._id },
+        { $unset: { recoveryCode: "", recoveryCodeExpires: "" } }
+      );
+    return res.status(200).json({message: 'Código Correto!'})
+    }catch (error){
+      console.error('Erro na rota /verify-recovery-code:', error);
+      return res.status(500).json({ error: 'Erro interno no servidor'});
+    }
+    
+  })
 
 // rota para inserir dados no banco das camisetas pelo postman 
 app.post('/shirts', async (req, res) => {
