@@ -76,8 +76,8 @@ const RecoveryPassword = () => {
         <Link to='/'><img src={Logo} alt="logo" className='logo-img' /></Link>
         <h1 className='recovery-password-title'>Recuperação de Senha</h1>
 
-        {error && <div className='error-message'>{error}</div>}
-        {success && <div className='success-message'>{success}</div>}
+        {error && <div className='error-message-recovery-password'>{error}</div>}
+        {success && <div className='success-message-recovery-password'>{success}</div>}
 
         <div className='input-group-recovery-password'>
           <input 
