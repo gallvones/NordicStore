@@ -142,15 +142,25 @@ app.post('/cadastrar', async (req, res) => {
 // Rota para mensagem de código ao usuário mensagem personalizada
 app.post('/send-recovery-code', async (req, res) => {
   const { email, code } = req.body;
-  
+  // aqui definimos expiresAt como agora + 5 minutos
+  const expiresAt = Date.now() + 5 * 60 * 1000;
+
   try {
-    // Verifica se o e-mail existe no banco 
+    // Verifica se o e‑mail existe no banco 
     const customer = await FormDataRegister.findOne({ mail: email });
     if (!customer) {
       return res.status(404).json({ message: 'E-mail não cadastrado' });
     }
 
-    // Configura o e-mail para o usuário
+    // Grava o código e a expiração
+    await FormDataCodeRecoveryPassword.create({
+      mail: email,
+      recoveryCode: code,
+      // pode ser Number (timestamp) ou Date:
+      recoveryCodeExpires: new Date(expiresAt)
+    });
+
+    // Configura o e‑mail para o usuário
     const userMailOptions = {
       from: process.env.usernameGmail,
       to: email,
@@ -159,67 +169,49 @@ app.post('/send-recovery-code', async (req, res) => {
         <h2>Recuperação de Senha</h2>
         <p>Você solicitou a redefinição de senha na Nordic Store.</p>
         <p>Seu código de verificação é: <strong>${code}</strong></p>
-        <p>Este código é válido por 10 minutos.</p>
+        <p>Este código é válido por 5 minutos.</p>
         <p>Caso não tenha solicitado esta alteração, ignore este e-mail.</p>
       `,
     };
 
-// Envia o e-mail
-transporter.sendMail(userMailOptions, (error, info) => {
-  if (error) {
-    console.error('Erro ao enviar código de recuperação:', error);
-    return res.status(500).json({ message: 'Falha ao enviar código' });
-  } else {
-    console.log('Código enviado para:', email, '| Info:', info.response);
-    return res.status(200).json({ 
-      message: 'Código enviado com sucesso',
-      
-    });
-  }
-});
-
-} catch (error) {
-console.error('Erro no processo de recuperação:', error);
-res.status(500).json({ message: 'Erro interno no servidor' });
-}
-});
-
-//rota para verificar o código
-app.post ( '/insert-recovery-code' ,async (req, res ) => {
-  const {email, code, codeTimer} = req.body;
-
-  try{
-    const insertCode = new FormDataCodeRecoveryPassword({ recoveryCode: code, recoveryCodeExpires: codeTimer, mail: email});
-    await insertCode.save();
-    res.status(200).json({message: 'Código armazenado com sucesso'});
-
-  } catch (error){
-    console.error('Erro no armazenamento do código de recuperação:', error);
-    res.status(500).json({ message: 'Erro com o banco de dados'});
-  }
-
-  });
-
-  app.post('/verify-recovery-code', async (req,res) => {
-    try{
-      const {code} = req.body
-      const checkCode = await FormDataCodeRecoveryPassword.findOne({ recoveryCode: code});
-      if(!checkCode){
-        return res.status(404).json({error: 'Código de confirmação incorreto!'});
-      } if(!checkCode.recoveryCodeExpires || checkCode.recoveryCodeExpires < Date.now() ){
-        return res.status(400).json({ error: 'Código expirado!' });
+    // Envia o e‑mail
+    transporter.sendMail(userMailOptions, (error, info) => {
+      if (error) {
+        console.error('Erro ao enviar código de recuperação:', error);
+        return res.status(500).json({ message: 'Falha ao enviar código' });
+      } else {
+        console.log('Código enviado para:', email, '| Info:', info.response);
+        return res.status(200).json({ message: 'Código enviado com sucesso' });
       }
-      await FormDataCodeRecoveryPassword.updateOne(
-        { _id: checkCode._id },
-        { $unset: { recoveryCode: "", recoveryCodeExpires: "" } }
-      );
-    return res.status(200).json({message: 'Código Correto!'})
-    }catch (error){
-      console.error('Erro na rota /verify-recovery-code:', error);
-      return res.status(500).json({ error: 'Erro interno no servidor'});
+    });
+
+  } catch (error) {
+    console.error('Erro no processo de recuperação:', error);
+    res.status(500).json({ message: 'Erro interno no servidor' });
+  }
+});
+
+app.post('/verify-recovery-code', async (req, res) => {
+  const { email, code } = req.body;
+
+  try {
+    const record = await FormDataCodeRecoveryPassword.findOne({ mail: email, recoveryCode: code });
+    if (!record) {
+      return res.status(404).json({ error: 'Código incorreto!' });
     }
-    
-  })
+    if (record.recoveryCodeExpires < Date.now()) {
+      return res.status(400).json({ error: 'Código expirado!' });
+    }
+
+    // Limpa o registro
+    await FormDataCodeRecoveryPassword.deleteOne({ _id: record._id });
+
+    return res.status(200).json({ message: 'Código correto!' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Erro interno' });
+  }
+});
 
 // rota para inserir dados no banco das camisetas pelo postman 
 app.post('/shirts', async (req, res) => {
