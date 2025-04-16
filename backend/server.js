@@ -213,6 +213,23 @@ app.post('/verify-recovery-code', async (req, res) => {
   }
 });
 
+app.post('/resetPassword', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const findUser = await FormDataRegister.findOne({ mail: email });
+    if (findUser) {
+      // Atualiza diretamente a senha com o valor recebido
+      findUser.password = password;
+      await findUser.save();
+      return res.status(200).json({ message: 'Senha atualizada com sucesso.' });
+    } else {
+      return res.status(404).json({ message: 'Email não encontrado.' });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro ao atualizar a senha.', error: error.message });
+  }
+});
+
 // rota para inserir dados no banco das camisetas pelo postman 
 app.post('/shirts', async (req, res) => {
   try {
