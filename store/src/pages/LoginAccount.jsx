@@ -20,6 +20,7 @@ const LoginAccount = () => {
 
       // 2. Verifica se existe um usuário com o email digitado
       const documentMDB = users.find(user => user.mail === email);
+   
       if (!documentMDB ) {
         const errorEmail = new Error ('Email não cadastrado');
         throw errorEmail;
