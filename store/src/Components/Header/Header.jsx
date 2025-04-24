@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import './HeaderStyle.css';
 import Logo from '../img/logo3.png';
 import CartButton from '../../Icons/CartButton/CartButton.jsx';
@@ -17,7 +17,15 @@ const Header = () => {
   const [userSurName, setUserSurName] = useState('');
   const [showMenu, setShowMenu] = useState(false);
 
-  // Verifica se há token e usuário no localStorage
+  // Função de logout  
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    setIsLogged(false);
+    navigate('/login');
+  }, [navigate]);
+
+  // Efeito que verifica o token e dados do usuário
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     setIsLogged(!!token);
@@ -25,21 +33,26 @@ const Header = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const { name, surname } = JSON.parse(storedUser);
-      if (name) setUserName(name);
-      if (surname) setUserSurName(surname);
+      setUserName(name || '');
+      setUserSurName(surname || '');
     }
   }, []);
+
+  // Efeito para logout automático após tempo definido
+  useEffect(() => {
+    if (!isLogged) return;
+
+    const LOGOUT_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutos
+    const timerId = setTimeout(() => {
+      handleLogout();
+    }, LOGOUT_TIMEOUT_MS);
+
+    return () => clearTimeout(timerId);
+  }, [isLogged, handleLogout]);
 
   const handleProfile = () => {
     navigate('/profile');
     setShowMenu(false);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    setIsLogged(false);
-    navigate('/login');
   };
 
   return (
@@ -54,40 +67,35 @@ const Header = () => {
 
         <div className='anchors'>
           <div className='items_anchors'>
-            <div><Link to='/section1'>Camisetas</Link></div>
+            <div><Link to='/section1'>Blusas Estampadas</Link></div>
+            <div><Link to='/section3'>Blusas Lisas</Link></div>
             <div><Link to='/section2'>Tênis</Link></div>
-            <div><Link to='/section3'>Bermudas</Link></div>
-            <div><Link to={isLogged ? '/orders' : '/login'}>Pedidos</Link></div>
+            
           </div>
         </div>
 
         <div className='icons'>
-          {/* Login / Menu */}
           {isLogged ? (
-            <div
-              className='login-menu-container'
-              
-            >
-              {/* Ícone navega para '/' quando logado */}
+            <div className='login-menu-container'>
               <div
                 className='login-icon'
                 onClick={() => navigate('/')}
                 onMouseEnter={() => setShowMenu(true)}
-              onMouseLeave={() => setShowMenu(false)}
+                onMouseLeave={() => setShowMenu(false)}
               >
                 <Login />
               </div>
-
-              {/* Saudação fixa (não afeta o layout) */}
               <p className='login-greeting'>
                 Olá, <span>{userName} {userSurName}</span>!
               </p>
-
-              {/* Menu dropdown */}
               {showMenu && (
-                <div className='login-menu' onMouseEnter={() => setShowMenu(true)} onMouseLeave={() => setShowMenu(false)}>
-                  <button onClick={handleProfile} >Perfil</button>
-                  <button onClick={handleLogout} >Logout</button>
+                <div
+                  className='login-menu'
+                  onMouseEnter={() => setShowMenu(true)}
+                  onMouseLeave={() => setShowMenu(false)}
+                >
+                  <button onClick={handleProfile}>Perfil</button>
+                  <button onClick={handleLogout}>Logout</button>
                 </div>
               )}
             </div>
@@ -96,8 +104,7 @@ const Header = () => {
               <Login />
             </Link>
           )}
-
-          <div><Instagram /></div>
+          <Instagram />
           <div><Whatsapp /></div>
           <div onClick={toggleCart}><CartButton /></div>
         </div>

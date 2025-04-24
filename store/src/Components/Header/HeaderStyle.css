@@ -55,11 +55,12 @@ cursor: pointer;
 .icons {
     display: flex;
     align-items: center;
-    margin-left: 50px;
+    margin-left: 20px;
     gap: 20px ;
     
     
 }
+
 
 .login-menu-container{
     position: relative;

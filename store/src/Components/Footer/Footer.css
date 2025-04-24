@@ -19,6 +19,7 @@
 .list1_footer > div >h2 {
     font-size:1.7rem;
     margin-bottom: 10px;
+    font-weight: normal;
 }
 .list1_footer > div > p {
     font-size:0.9rem;
@@ -52,6 +53,7 @@
 .list2_footer > div >h2 {
     font-size:1.7rem;
     margin-bottom: 10px;
+    font-weight: normal;
 }
 .list2_footer > div > p {
     font-size:0.9rem;
@@ -93,6 +95,7 @@
 .list3_footer > div >h2 {
     font-size:1.7rem;
     margin-bottom: 0.8rem;
+    font-weight: normal;
 }
 .list3_footer > div >p {
     font-size:0.9rem;
@@ -105,6 +108,7 @@
 .list4_footer > div >h2 {
     font-size:1.7rem;
     margin-bottom: 0.8rem;
+    font-weight: normal;
 }
 .link_aboutUs {
     font-size: 1rem;

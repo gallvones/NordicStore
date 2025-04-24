@@ -80,7 +80,10 @@ const Section1 = () => {
 
   return (
     <div className='all-elements'>
-<div className='section1-title'> <p> Destaques</p></div>
+<div className='section1-title'> 
+<h2>Camisetas Estampadas</h2>
+<p> Destaques</p>
+</div>
       <div className='all-items'>
         {shirts.length > 0 ? (
           shirts.map((shirt) => (

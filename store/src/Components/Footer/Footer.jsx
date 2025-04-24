@@ -40,7 +40,7 @@ const Footer = () => {
       </div>
       
       <div className='list4_footer'>
-        <div> <h2>Sobre</h2></div>
+        <div> <h2>About Us</h2></div>
        <Link to="aboutUs" className='link_aboutUs'>
         <div><p>NORDIC STORE</p></div>
         </Link>

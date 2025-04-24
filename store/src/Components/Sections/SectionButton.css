@@ -1,5 +1,6 @@
 .all_space{
 padding: 2%;
+margin-top: 10px;
 
 }
 
@@ -15,14 +16,16 @@ align-items: center;
 justify-content: center;
 cursor: pointer;
 color: white;
-font-weight: bold;
+font-weight: normal;
 white-space: nowrap;
 
 }
 
+
 .btn:hover {
     background-color: rgba(138, 194, 207, 1);
     color: black;
+    font-weight: bold;
 }
 .link_btn{
     text-decoration: none;
