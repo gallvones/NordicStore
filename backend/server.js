@@ -60,6 +60,8 @@ app.use(cors({
 const FormDataRegister = require('./FormDataRegister');
 const FormDataShirts = require('./FormDataShirts');
 const FormDataCodeRecoveryPassword = require('./FormDataCodesRecoveryPassword');
+const FormDataTennis = require('./FormDataTennis');
+const FormDataSmoothShirts = require('./FormDataSmoothShirts');
 
 // Configuração de e-mail 
 const transporter = nodemailer.createTransport({
@@ -78,6 +80,67 @@ app.get('/allshirts', async (req, res) => {
   } catch (error) {
     console.error('Erro ao buscar camisas:', error);
     res.status(500).json({ message: 'Erro ao buscar dados' });
+  }
+});
+
+// rota para inserir dados no banco das camisetas pelo postman 
+app.post('/shirts', async (req, res) => {
+  try {
+    const { description, color, size, brand, amount, price, img1, img2 } = req.body;
+    const initDocumentShirt = new FormDataShirts({ description, color, size, brand, amount, price, img1, img2 });
+    await initDocumentShirt.save();
+    res.status(200).json({ message: 'Blusa cadastrada!' });
+  } catch (error) {
+    console.error('Erro ao cadastrar:', error);
+    res.status(500).json({ message: 'Erro ao processar dados' });
+  }
+});
+
+// Rota para pegar informacoes dos tenis
+app.get('/alltennis', async (req, res) => {
+  try {
+    const tennis = await FormDataTennis.find();
+    res.status(200).json(tennis);
+  } catch (error) {
+    console.error('Erro ao buscar Tênis:', error);
+    res.status(500).json({ message: 'Erro ao buscar dados' });
+  }
+});
+
+// rota para inserir dados no banco das camisetas pelo postman 
+app.post('/tennis', async (req, res) => {
+  try {
+    const { description, color, size, brand, amount, price, img1, img2 } = req.body;
+    const initDocumentTennis = new FormDataTennis({ description, color, size, brand, amount, price, img1, img2 });
+    await initDocumentTennis.save();
+    res.status(200).json({ message: 'Tênis cadastrado!' });
+  } catch (error) {
+    console.error('Erro ao cadastrar:', error);
+    res.status(500).json({ message: 'Erro ao processar dados' });
+  }
+});
+
+// Rota para pegar informacoes das camisetas lisas
+app.get('/allsmoothshirts', async (req, res) => {
+  try {
+    const smoothShirts = await FormDataSmoothShirts.find();
+    res.status(200).json(smoothShirts);
+  } catch (error) {
+    console.error('Erro ao buscar camisas lisas:', error);
+    res.status(500).json({ message: 'Erro ao buscar dados' });
+  }
+});
+
+// rota para inserir dados no banco das camisetas lisas pelo postman 
+app.post('/smoothshirts', async (req, res) => {
+  try {
+    const { description, color, size, brand, amount, price, img1, img2 } = req.body;
+    const initDocumentSmoothShirt = new FormDataSmoothShirts({ description, color, size, brand, amount, price, img1, img2 });
+    await initDocumentSmoothShirt.save();
+    res.status(200).json({ message: 'Blusa Lisa cadastrada!' });
+  } catch (error) {
+    console.error('Erro ao cadastrar:', error);
+    res.status(500).json({ message: 'Erro ao processar dados' });
   }
 });
 
@@ -230,18 +293,7 @@ app.post('/resetPassword', async (req, res) => {
   }
 });
 
-// rota para inserir dados no banco das camisetas pelo postman 
-app.post('/shirts', async (req, res) => {
-  try {
-    const { description, color, size, brand, amount, price, img1, img2 } = req.body;
-    const initDocumentShirt = new FormDataShirts({ description, color, size, brand, amount, price, img1, img2 });
-    await initDocumentShirt.save();
-    res.status(200).json({ message: 'Blusa cadastrada!' });
-  } catch (error) {
-    console.error('Erro ao cadastrar:', error);
-    res.status(500).json({ message: 'Erro ao processar dados' });
-  }
-});
+
 
 // Servir arquivos estáticos do frontend (Deve vir depois das rotas api)
 app.use(express.static(path.join(__dirname, '../store/build')));

@@ -29,11 +29,22 @@
     padding: 5px;
    color: white;
     font-size: 17px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title3{
+    font-size: 20px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    display: flex;
+    gap: 5px;
 }
 
 .item_price3 {
     font-size: 17px;
-    color: white
+    color: white;
+    font-weight: lighter;
 }
 
 .item_image3:hover {
