@@ -8,7 +8,7 @@ const FormDataSchemaTennis = new mongoose.Schema ({
     amount: Number,
     price: String,
     img1: String,
-    img2: String,
+    img2: String, 
 }, {collection: 'Tennis' });
 
 const FormDataTennis = mongoose.model('FormDataTennis', FormDataSchemaTennis);

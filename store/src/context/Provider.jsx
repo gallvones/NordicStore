@@ -6,7 +6,7 @@ import AppContext from './AppContext';
 const Provider = ({ children }) => {
     
     const [cartMenu, setCartMenu] = useState(false); // cart closed
-
+    const [itemsCart, setItemsCart] = useState([]); // cart vazio
     const toggleCart = () => {
         setCartMenu(!cartMenu); 
     };
@@ -14,6 +14,8 @@ const Provider = ({ children }) => {
     const value = {
         cartMenu,  
         toggleCart,  
+        itemsCart,
+        setItemsCart
     };
 
     return (
