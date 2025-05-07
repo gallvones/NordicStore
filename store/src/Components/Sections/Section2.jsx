@@ -4,12 +4,17 @@ import '../Sections/Section2.css';
 import SectionButton from "./SectionButton";
 import { Link } from "react-router-dom";
 
+const backendURL = window.location.hostname === 'localhost'
+? 'http://localhost:3001'
+: 'https://nordic-store.onrender.com';
+
 const Section2 = () => {
   const [tennis, setTennis] = useState([])
   const [status, setStatus] = useState('loading') 
 
+
   useEffect(() => {
-    fetch('http://localhost:3001/alltennis')
+    fetch(`${backendURL}/alltennis`)
       .then(res => {
         if (!res.ok) throw new Error('Falha ao carregar produtos')
         return res.json()

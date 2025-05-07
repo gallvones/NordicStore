@@ -4,12 +4,17 @@ import '../Sections/Section1.css'
 import SectionButton from './SectionButton'
 import { Link } from 'react-router-dom'
 
-const Section1 = () => {
-  const [shirts, setShirts] = useState([])
-  const [status, setStatus] = useState('loading') 
+const backendURL = window.location.hostname === 'localhost'
+? 'http://localhost:3001'
+: 'https://nordic-store.onrender.com';
 
+const Section1 = () => {
+  const [shirts, setShirts] = useState([]);
+  const [status, setStatus] = useState('loading') ;
+
+ 
   useEffect(() => {
-    fetch('http://localhost:3001/allshirts')
+    fetch(`${backendURL}/allshirts`)
       .then(res => {
         if (!res.ok) throw new Error('Falha ao carregar produtos')
         return res.json()

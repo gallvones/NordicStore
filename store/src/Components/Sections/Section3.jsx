@@ -4,12 +4,16 @@ import Item3 from "../ItemCarrousel/item3";
 import SectionButton from "./SectionButton";
 import { Link } from 'react-router-dom';
 
+const backendURL = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001'
+  : 'https://nordic-store.onrender.com';
 const Section2 = () => {
   const [smoothShirts, setSmoothShirts] = useState([])
   const [status, setStatus] = useState('loading') 
 
+  
   useEffect(() => {
-    fetch('http://localhost:3001/allsmoothshirts')
+    fetch(`${backendURL}/allsmoothshirts`)
       .then(res => {
         if (!res.ok) throw new Error('Falha ao carregar produtos')
         return res.json()
