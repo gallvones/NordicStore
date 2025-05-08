@@ -7,12 +7,15 @@ import AppContext from '../../context/AppContext';
 const Item = ({ItemValues}) => {
 const {img,price,img2,title} = ItemValues;
 const [currentImg, setCurrentImg] = useState(img);
-const {setItemsCart} = useContext(AppContext);
+const {setItemsCart, itemsCart} = useContext(AppContext);
+
+
 const addCart = () => {
-  setItemsCart(prev => [
-    ...prev,
-    { img, title, price, quantity: 1, size: 'G' }
-  ]);
+  const newItem = { img, title, price, quantity: 1, size: 'G' };
+  const updatedCart = [...itemsCart, newItem];
+  
+  setItemsCart(updatedCart);
+  localStorage.setItem('cart', JSON.stringify(updatedCart));
 };
 
 

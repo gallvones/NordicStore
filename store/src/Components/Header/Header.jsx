@@ -2,14 +2,12 @@ import React, { useContext, useState, useEffect, useCallback } from 'react';
 import './HeaderStyle.css';
 import Logo from '../img/logo3.png';
 import CartButton from '../../Icons/CartButton/CartButton.jsx';
-import Instagram from '../../Icons/Instagram/Instagram.jsx';
 import Login from '../../Icons/Login/Login.jsx';
-import Whatsapp from '../../Icons/Whatsapp/Whatsapp.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 
 const Header = () => {
-  const { toggleCart } = useContext(AppContext);
+  const { cartMenu, toggleCart } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [isLogged, setIsLogged] = useState(false);
@@ -56,7 +54,7 @@ const Header = () => {
   };
 
   return (
-    <div className='all_header'>
+    <div className={cartMenu ? 'all-header-with-menu-open' : 'all-header'}>
       <div className='header_container'>
         <Link to='/'>
           <div className='logo'>
@@ -67,9 +65,9 @@ const Header = () => {
 
         <div className='anchors'>
           <div className='items_anchors'>
-            <div><Link to='/section1'>Blusas Estampadas</Link></div>
-            <div><Link to='/section3'>Blusas Lisas</Link></div>
+            <div><Link to='/section1'>Camisetas Estampadas</Link></div>
             <div><Link to='/section2'>Tênis</Link></div>
+            <div><Link to='/section3'>Camisetas Lisas</Link></div>
             
           </div>
         </div>
@@ -84,6 +82,7 @@ const Header = () => {
                 onMouseLeave={() => setShowMenu(false)}
               >
                 <Login />
+                
               </div>
               <p className='login-greeting'>
                 Olá, <span>{userName} {userSurName}</span>!
@@ -96,16 +95,16 @@ const Header = () => {
                 >
                   <button onClick={handleProfile}>Perfil</button>
                   <button onClick={handleLogout}>Logout</button>
+                  
                 </div>
               )}
+              
             </div>
           ) : (
             <Link to='/login'>
               <Login />
             </Link>
           )}
-          <Instagram />
-          <div><Whatsapp /></div>
           <div onClick={toggleCart}><CartButton /></div>
         </div>
       </div>

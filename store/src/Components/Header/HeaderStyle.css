@@ -1,4 +1,16 @@
-
+.all-header{
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.all-header-with-menu-open{
+position: relative;
+top: 0;
+left: 0;
+width: 100%;
+}
 .header_container {
     display: flex;
     align-items: center;

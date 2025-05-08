@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import AppContext from '../../context/AppContext';
 import { BsFillCartXFill } from "react-icons/bs";
 import { IoMdCloseCircle } from "react-icons/io";
+import { FaTrash } from "react-icons/fa";
 import './CartMenu.css';
 
 const CartMenu = () => {
@@ -12,13 +13,15 @@ const CartMenu = () => {
     const newItems = [...itemsCart];
     newItems[idx].quantity = Math.max(1, newItems[idx].quantity + delta);
     setItemsCart(newItems);
+    localStorage.setItem('cart', JSON.stringify(newItems));
   };
 
-  // novo: atualiza só o tamanho do item no índice idx
+  // atualiza só o tamanho do item no índice idx
   const updateSize = (idx, size) => {
     const newItems = [...itemsCart];
     newItems[idx].size = size;
     setItemsCart(newItems);
+    localStorage.setItem('cart', JSON.stringify(newItems));
   };
 
   const total = itemsCart.reduce((sum, item) => {
@@ -28,6 +31,11 @@ const CartMenu = () => {
     return sum + price * item.quantity;
   }, 0);
 
+  const removeItem = (idx) => {
+    const updatedItems = itemsCart.filter((_, index) => index !== idx);
+    setItemsCart(updatedItems);
+    localStorage.setItem('cart', JSON.stringify(updatedItems))
+  };
   return (
     <div className={cartMenu ? 'cart-menu-open' : 'cart-menu-close'}>
       <div className={cartMenu ? 'empty-cart-open' : 'empty-cart-close'}>
@@ -49,7 +57,7 @@ const CartMenu = () => {
                   : item.price;
 
                 // garante um tamanho padrão caso ainda não tenha sido definido
-                const currentSize = item.size || 'M';
+                const currentSize = item.size || 'G';
 
                 return (
                   <li key={index} className='item-cart-row'>
@@ -90,11 +98,15 @@ const CartMenu = () => {
                           +
                         </button>
                       </p>
-
+                     <div className='price-and-trash'>
                       <p className='item-cart-price'>
                         Valor: R${(price * item.quantity).toFixed(2)}
                       </p>
+                      <div className='remove-item-from-cart'> <FaTrash onClick={() => removeItem(index)}/></div>
+                      </div>
+                      
                     </div>
+                    
                   </li>
                 );
               })}

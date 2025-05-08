@@ -1,4 +1,4 @@
-import  React from "react";
+import React from "react";
 import Header from "./Components/Header/Header";
 import SlideShow from "./Components/Slide/SlideShow";
 import Provider from "./context/Provider";
@@ -11,6 +11,7 @@ import CartMenu from "./Components/CartMenu/CartMenu";
 
 
 function App() {
+
 
   return (
     <Provider>

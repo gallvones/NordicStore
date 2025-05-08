@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext } from 'react';
 import './SlideShow.css';
 //Slide
 import { register } from 'swiper/element/bundle';
@@ -7,12 +7,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import AppContext from '../../context/AppContext';
 
 
 register();
 
 
 const SlideShow = () => {
+const {cartMenu} = useContext(AppContext);
 
 const imgs = [
   { id: '1', Image: ''},
@@ -21,7 +23,7 @@ const imgs = [
 ]
 
   return (
-    <div className='slide'>
+    <div className={cartMenu ? 'slide-with-cart-open': 'slide' }>
       <br/>
       <br/>
         <Swiper
