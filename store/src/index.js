@@ -14,7 +14,7 @@ import Section2P from '../src/pages/SectionsPages/Section2P.jsx';
 import Section3P from '../src/pages/SectionsPages/Section3P.jsx';
 import RecoveryPassword from './pages/RecoveryPassword/RecoveryPassword.jsx';
 import ResetPassword from './pages/ResetPassword/ResetPassword.jsx';
-
+import Freight from './pages/Freight/freight.jsx';
 
 
  const router = createBrowserRouter([
@@ -53,6 +53,10 @@ element: <App/>
 }, {
   path: "/resetPassword",
   element: <ResetPassword/>
+},
+{
+  path: "/freight",
+  element: <Freight/>
 }
  ]);
  

@@ -5,7 +5,7 @@ import { BsFillCartXFill } from "react-icons/bs";
 import { IoMdCloseCircle } from "react-icons/io";
 import { FaTrash } from "react-icons/fa";
 import './CartMenu.css';
-
+import { Link } from 'react-router-dom';
 const CartMenu = () => {
   const { itemsCart, setItemsCart, cartMenu, toggleCart } = useContext(AppContext);
 
@@ -117,7 +117,7 @@ const CartMenu = () => {
             </div>
 
             <div className='cart-button-pay-container'>
-              <button className='cart-button-pay'>Finalizar Compra</button>
+             <Link to='/freight'><button className='cart-button-pay'>Finalizar Compra</button></Link> 
             </div>
           </div>
         )}

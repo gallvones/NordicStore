@@ -20,7 +20,7 @@ const addCart = () => {
 
 
   return (
-    <div className="container">
+    <div className="all-item1-container">
     <div 
     onMouseMove={() => setCurrentImg(img2)}
       onMouseOut={() => setCurrentImg(img)}

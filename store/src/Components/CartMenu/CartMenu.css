@@ -316,6 +316,13 @@
   font-size: 12px;
   border-radius: 20px;
   color: rgba(138, 194, 207, 1);
+  cursor: pointer;
+}
+
+.cart-button-pay:hover{
+  background-color: rgba(138, 194, 207, 1);
+    color: black;
+    font-weight: bold;
 }
  
 

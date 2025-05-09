@@ -9,13 +9,17 @@ const LoginAccount = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const backendURL = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001'
+  : 'https://nordic-store.onrender.com';
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+
     try {
       // 1. Busca todos os usuários
-      const response = await fetch('http://localhost:3001/allUsers');
+      const response = await fetch(`${backendURL}/allUsers`);
       const users = await response.json();
 
       // 2. Verifica se existe um usuário com o email digitado
@@ -33,7 +37,7 @@ const LoginAccount = () => {
         
       } 
       const { password:pwdFromDb, ...userWithoutPassword } = documentMDB; // Remove o campo 'password'
-      const userMail = await fetch ('http://localhost:3001/usertoken', {
+      const userMail = await fetch (`${backendURL}/usertoken`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

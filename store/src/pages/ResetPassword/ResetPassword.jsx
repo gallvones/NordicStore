@@ -13,6 +13,9 @@ const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const backendURL = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001'
+  : 'https://nordic-store.onrender.com';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +27,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/resetPassword', {
+      const response = await fetch(`${backendURL}/resetPassword`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

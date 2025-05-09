@@ -11,6 +11,9 @@ const RecoveryPassword = () => {
   const [showCodeInput, setShowCodeInput] = useState(false);
   const [code, setCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const backendURL = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001'
+  : 'https://nordic-store.onrender.com';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,11 +21,12 @@ const RecoveryPassword = () => {
     setError('');
     setSuccess('');
 
+
     try {
       if (!showCodeInput) {
         // ——— Fase 1: Envio do e‑mail e geração/gravação do código no back ———
         const generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-        const response = await fetch('http://localhost:3001/send-recovery-code', {
+        const response = await fetch(`${backendURL}/send-recovery-code`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -41,7 +45,7 @@ const RecoveryPassword = () => {
 
       } else {
         // ——— Fase 2: Verificação do código ———
-        const verifyResponse = await fetch('http://localhost:3001/verify-recovery-code', {
+        const verifyResponse = await fetch(`${backendURL}/verify-recovery-code`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
