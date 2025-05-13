@@ -12,6 +12,7 @@ const Provider = ({ children }) => {
       }, []);   
     const [cartMenu, setCartMenu] = useState(false); // cart closed
     const [itemsCart, setItemsCart] = useState([]); // cart vazio
+    const [isLogged, setIsLogged] = useState(false); // Logged user
     const toggleCart = () => {
         setCartMenu(!cartMenu); 
     };
@@ -20,7 +21,9 @@ const Provider = ({ children }) => {
         cartMenu,  
         toggleCart,  
         itemsCart,
-        setItemsCart
+        setItemsCart,
+        isLogged,
+        setIsLogged
     };
 
     return (

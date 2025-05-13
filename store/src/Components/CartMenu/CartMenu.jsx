@@ -7,7 +7,7 @@ import { FaTrash } from "react-icons/fa";
 import './CartMenu.css';
 import { Link } from 'react-router-dom';
 const CartMenu = () => {
-  const { itemsCart, setItemsCart, cartMenu, toggleCart } = useContext(AppContext);
+  const { itemsCart, setItemsCart, cartMenu, toggleCart, isLogged, setIsLogged } = useContext(AppContext);
 
   const updateQuantity = (idx, delta) => {
     const newItems = [...itemsCart];
@@ -36,6 +36,7 @@ const CartMenu = () => {
     setItemsCart(updatedItems);
     localStorage.setItem('cart', JSON.stringify(updatedItems))
   };
+  
   return (
     <div className={cartMenu ? 'cart-menu-open' : 'cart-menu-close'}>
       <div className={cartMenu ? 'empty-cart-open' : 'empty-cart-close'}>
@@ -117,7 +118,12 @@ const CartMenu = () => {
             </div>
 
             <div className='cart-button-pay-container'>
-             <Link to='/freight'><button className='cart-button-pay'>Finalizar Compra</button></Link> 
+
+             {isLogged ? 
+             <Link to='/freight'><button className='cart-button-pay'>Finalizar Compra</button></Link> : <Link to='/login'><button className='cart-button-pay'>Finalizar Compra</button></Link> 
+            
+            }
+    
             </div>
           </div>
         )}

@@ -9,9 +9,15 @@ const Freight = () => {
     const [phone, setPhone] = useState('')
     const [cep, setCep] =useState('')
     const [correios, setCorreios] = useState(true)
+    const [freightValor, setFreightValor] = useState('')
+
+
+
     const togglebutton = () =>{
       setCorreios(false)
     }
+
+
   return (
     <div className='freight-all- container'>
         <div className='forms-freight-container'>
@@ -79,8 +85,9 @@ placeholder='Número'
 <p>Pac: <button className='selected-option'></button></p>
 
 </div>
+
 </div>
-        
+
         
     </div>
   )

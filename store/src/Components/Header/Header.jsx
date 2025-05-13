@@ -7,10 +7,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 
 const Header = () => {
-  const { cartMenu, toggleCart } = useContext(AppContext);
+  const { cartMenu, toggleCart, isLogged, setIsLogged } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const [isLogged, setIsLogged] = useState(false);
+  
   const [userName, setUserName] = useState('');
   const [userSurName, setUserSurName] = useState('');
   const [showMenu, setShowMenu] = useState(false);

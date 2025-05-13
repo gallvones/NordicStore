@@ -13,7 +13,9 @@ const RegisterAccount = () => {
     mail: '',
     password: ''
   });
-
+  const backendURL = window.location.hostname === 'localhost'
+  ? 'http://localhost:3001'
+  : 'https://nordic-store.onrender.com';
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -25,7 +27,7 @@ const RegisterAccount = () => {
  
 
     try {
-      const response = await fetch('https://nordic-store.onrender.com/cadastrar', {
+      const response = await fetch(`${backendURL}/cadastrar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

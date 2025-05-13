@@ -147,7 +147,7 @@ app.post('/smoothshirts', async (req, res) => {
 //Rota para pegar usuários registrados
 app.get('/allUsers', async (req, res) => {
 try{
-  const users =  await FormDataRegister.find({}, 'mail password name surname');
+  const users =  await FormDataRegister.find({}, 'mail password name surname phone cep ');
   res.status(200).json(users);
 } catch (error){
   console.error('Erro ao buscar usuários:', error);
@@ -164,7 +164,8 @@ app.post('/usertoken', async (req, res) => {
     }
 
 const token =  jwtModules.sign({userId: user._id, userWithoutPassword: user.mail})
-res.json({ token, user: { id: user._id, email: user.mail, name: user.name, surname: user.surname}});
+res.json({ token, user: { id: user._id, email: user.mail, name: user.name, surname: user.surname, phone: user.phone,
+  cep: user.cep}});
   } catch(error){
 console.error('Erro no servidor:', error);
 res.status(500).json({error: 'Erro interno no servidor.'});
