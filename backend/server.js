@@ -297,12 +297,36 @@ app.post('/resetPassword', async (req, res) => {
 
 
 app.post('/freightCep', async (req,res) => {
-  const cepOrigin = cepNordic; 
   const {cepDestiny} = req.body ;
-
+  const cepOrigin = cepNordic;
+  const url = 'https://www.melhorenvio.com.br/api/v2/me/shipment/calculate';
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMGE3ODhkNjYxY2M0NzdmZDgwOTg4YmNiNTYwNzZhNTAzNGM5M2Y5NWIzZWJjM2NkMmI4ZDhlOGNiODA1ZmM1NjBjM2IxY2E0MjM4MmQ5ZjEiLCJpYXQiOjE3NDgyODY2NTkuMTk4ODU1LCJuYmYiOjE3NDgyODY2NTkuMTk4ODU2LCJleHAiOjE3Nzk4MjI2NTkuMTg1MTU0LCJzdWIiOiI5ZjAxNTY5Ni1mN2ZiLTQzNmUtYjg4My1lN2Y1YzE5MDQ5NTEiLCJzY29wZXMiOlsic2hpcHBpbmctY2FsY3VsYXRlIl19.dWglAOd9SJL36yBx1kjUnXMzw-sLg30ZmxKz4lO6BO6HDtQFctmTF_X5D7v1lC8ehGdyB9b5xfkOjzArqgkQvPVsIiV-sFkZbwy81cLCtkgfS7EQ4Lr2dL_CmhXGfe9aaiT3-AUctbZZPdeN4qN_2LIvxnIocsAyi85laAOI1M9lj9GCaiaGV1Q_lELgCm0lPfnuFTwf0dwMI82nir2MvOqmlHVswPPtKq3xxVAS2qSu8oyjW_GWRXz1cTtbKkPcYhFBUrv5Cl1cOv-_fXqsf4do6roOwXPYqcaE8QpK-Fho14Oh6wcF_5vl3-HTrjQ6oc-LVsNpnlK5GnhCpD3Djm5p0ALViVxVOKNAFS92Fol5-sFId90cHo-m41jB5SJijg9d4TQVuwTsJoN0zhKg_863qayj-45mxaqAzc4V_fYf6WXeA-hJXTaiLN2FxvePnMwBZUK0Es6J930eqD2pn_UfR53SKgd30hKRsjwBQaziHSDJFo18YL3eP5f_dOPqKaqae1YwoBbLW-R1AHp55HKM-WU7zfQWhs2FK_r8mnOcC6B--0FxAmVS7tBL36a5-An-N1QQU7bYeRJ2TgtPsaeoUlXG_va9fPA6f_h2aGMmwxzjupmO1XNB3jf5yqf24P9IOWbXpVbTYpQiD5PL6TkRzIEeF0dXuXbD7qgtGf4',
+      'User-Agent': 'Aplicação (email para contato técnico)'
+    },
+    body: JSON.stringify({
+      from: {postal_code: `${cepOrigin}`},
+      to: {postal_code: `${cepDestiny}`},
+      package: {height: 2, width: 27, length: 27, weight: 0.8}
+    })
+    
+  };
   
-  // Aqui eu preciso calcular o frete. 
-})
+    const responseMelhorEnvio =  await fetch(url, options);
+    if (!responseMelhorEnvio.ok){
+      const errBody = await response.json().catch(() => ({}));
+      return res
+        .status(responseMelhorEnvio.status)
+        .json({ error: errBody || responseMelhorEnvio.statusText });
+    }
+    const data = await responseMelhorEnvio.json();
+    return res.json(data);
+  
+});
 
 app.post('freightDatas', async (req, res) => {
   const {name,surname, mail, phone, cepDestiny,complement,number, paymentStatus } = req.body ;

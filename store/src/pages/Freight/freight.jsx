@@ -36,6 +36,10 @@ const Freight = () => {
     const [correios, setCorreios] = useState(true)
     const [freightValor, setFreightValor] = useState('')
     const [bsbInput, setBsbInput] = useState(false);
+    const backendURL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3001'
+    : 'https://nordic-store.onrender.com';
+
     const togglebutton = () =>{
       if (
         name.trim() &&
@@ -47,7 +51,26 @@ const Freight = () => {
     number.trim()
       )
       setCorreios(false);
-    }
+
+
+  };
+  const handleSubmit = async (e) => {
+    try{
+      const response = await fetch(`${backendURL}/freightCep`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+        cepDestiny: cep
+        }),
+      });
+      
+      const result = await response.json(); 
+     // localStorage.setItem(`freightOption:`, result)
+     console.log(result)
+          } catch(error){
+            
+          }
+  }
 
 
   return (
@@ -118,7 +141,7 @@ required
 <div className='calculator-freight'>
   <button type='button' onClick={togglebutton} className='calculator-freight-button'>
   {correios ? (
-  <p>Calcular Frete!</p>
+  <p onClick={handleSubmit}>Calcular Frete!</p>
 ) : (
   <p>Calculando...</p>
 )}
