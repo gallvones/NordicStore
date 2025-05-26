@@ -2,9 +2,9 @@
 .forms-freight-container{
     width: 80%;
     max-width: 500px; 
-   height: 700px;
-   min-height: 700px;
-   max-height: 700px;
+   height: 750px;
+   min-height: 750px;
+   max-height: 750px;
     margin: auto;
     border: solid 3px rgba(94, 128, 137, 1); 
     border-radius: 50px; 
@@ -88,7 +88,7 @@
     font-size: 0.9rem;
 }
 
-.calculator-freight > button{
+.calculator-freight-button{
     width: 170px;
     border: solid 2px rgba(94, 128, 137, 1); 
     border-radius: 10px;
@@ -98,6 +98,16 @@
     margin-right: 10px;
     font-size: 0.9rem;
     cursor: pointer;
+}
+
+.calculator-freight-button:hover{
+    background-color: rgba(138, 194, 207, 1);
+    color: black;
+}
+
+.calculator-freight-button > p:hover{
+    background-color: rgba(138, 194, 207, 1);
+    color: black;
 }
 
 .correios-options-container{
@@ -113,6 +123,75 @@
     color: rgba(138, 194, 207, 1);
     margin-top: 5px;
 }
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    gap: 20px;
+  }
+  
+  .custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+  }
+  
+  .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .checkmark {
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    border: 1px solid #888;
+    border-radius: 4px;
+    margin-right: 8px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+ 
+  .custom-checkbox:hover .checkmark {
+    background-color: rgba(138, 194, 207, 0.4);
+  }
+  
+ 
+  .custom-checkbox input:checked ~ .checkmark {
+    background-color: rgba(138, 194, 207, 1);
+    border-color: rgba(138, 194, 207, 1);
+  }
+  
+  
+  .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .custom-checkbox input:checked ~ .checkmark::after {
+    display: block;
+  }
+  
+  .custom-checkbox .checkmark::after {
+    left: 5px;
+    top: 3px;
+    width: 3px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .text-buttons-freight {
+    color: rgba(138, 194, 207, 1);
+  }
+  
 .selected-option{
   height: 18px;
   width: 18px;

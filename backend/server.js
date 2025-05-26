@@ -14,6 +14,7 @@ const username = process.env.MONGODB_USERNAME;
 const password = process.env.MONGODB_PASSWORD;
 const usernameGmail = process.env.GMAIL_USERNAME;
 const passwordGmail = process.env.PASSWORD_USERNAME;
+const cepNordic = process.env.NORDIC_CEP;
 
 // Conexão com o banco de dados
 const connectToDataBase = async () => {
@@ -295,6 +296,19 @@ app.post('/resetPassword', async (req, res) => {
 });
 
 
+app.post('/freightCep', async (req,res) => {
+  const cepOrigin = cepNordic; 
+  const {cepDestiny} = req.body ;
+
+  
+  // Aqui eu preciso calcular o frete. 
+})
+
+app.post('freightDatas', async (req, res) => {
+  const {name,surname, mail, phone, cepDestiny,complement,number, paymentStatus } = req.body ;
+  // Aqui eu preciso receber o status do pagamento e enviar para o meu email ou oq for o status do pedido, com todos os dados recebidos para preparar o pedido e o envio.
+  
+})
 
 // Servir arquivos estáticos do frontend (Deve vir depois das rotas api)
 app.use(express.static(path.join(__dirname, '../store/build')));
