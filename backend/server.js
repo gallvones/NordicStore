@@ -28,6 +28,7 @@ const connectToDataBase = async () => {
   }
 };
 connectToDataBase();
+module.exports = connectToDataBase;
 
 // Middleware para permitir requisicoes json e cors
 app.use(express.json());
