@@ -21,3 +21,5 @@ describe("Conectando ao banco de dados", () => {
     consoleLogSpy.mockRestore(); // Restaura o console original depois dos testes, retirando o espiao para nao interferir em outros testes
   });
 });
+
+

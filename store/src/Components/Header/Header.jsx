@@ -66,7 +66,7 @@ const Header = () => {
         <div className='anchors'>
           <div className='items_anchors'>
             <div><Link to='/section1'>Camisetas Estampadas</Link></div>
-            <div><Link to='/section2'>Tênis</Link></div>
+            {/* <div><Link to='/section2'>Tênis</Link></div> */}
             <div><Link to='/section3'>Camisetas Lisas</Link></div>
             
           </div>

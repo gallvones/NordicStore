@@ -8,6 +8,7 @@ const Freight = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const userDatas = localStorage.getItem('user');
+    localStorage.removeItem('freightOption');
     if(userDatas){
       const user = JSON.parse(userDatas);
 
@@ -16,7 +17,7 @@ const Freight = () => {
       setMail(user.email || '');
       setPhone(user.phone || '');
       setCep(user.cep || '');
-
+      
     } else{
       alert('Seu login expirou, retornando para a página de login...')
       navigate('/login')
@@ -25,7 +26,7 @@ const Freight = () => {
 
   }, [navigate]);
 
-
+    const valueOnCart = localStorage.getItem('totalValueCart')
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [mail, setMail] = useState('')
@@ -34,8 +35,12 @@ const Freight = () => {
     const [complement, setComplement] = useState('')
     const [number, setNumber] = useState('')
     const [correios, setCorreios] = useState(true)
-    const [freightValor, setFreightValor] = useState('')
-    const [bsbInput, setBsbInput] = useState(false);
+    const [shipping1, setShipping1] = useState([])
+    const [shipping2, setShipping2] = useState([])
+    const [shipping3, setShipping3] = useState([])
+    const [freightValor, setFreightValor] = useState(0)
+    const [bsbInput, setBsbInput] = useState(null);
+    // Provavel que eu precise criar mais uma variavel de estado para checar os checkradio de quando o bsbInput é true
     const backendURL = window.location.hostname === 'localhost'
     ? 'http://localhost:3001'
     : 'https://nordic-store.onrender.com';
@@ -65,8 +70,31 @@ const Freight = () => {
       });
       
       const result = await response.json(); 
-     // localStorage.setItem(`freightOption:`, result)
-     console.log(result)
+      localStorage.setItem('freightOption', JSON.stringify(result));
+      const freightData = JSON.parse(localStorage.getItem('freightOption'));
+
+      let cheapestFreights = [];
+      
+      
+      if (freightData && Array.isArray(freightData)) {
+        
+        // Filtra apenas os fretes que possuem price os que n tem são descartados
+        const availableFreights = freightData.filter(item => item.price !== undefined);
+      
+        // Encontra o menor preço
+        cheapestFreights = availableFreights.filter(item => {
+          const shippingName = item.name.toLowerCase();
+          return (
+            shippingName.includes('loggi') ||
+            shippingName.includes('sedex') ||
+            shippingName == 'pac'
+          );
+        });
+        if (cheapestFreights.length >= 1) setShipping1(cheapestFreights[0]);
+if (cheapestFreights.length >= 2) setShipping2(cheapestFreights[1]);
+if (cheapestFreights.length >= 3) setShipping3(cheapestFreights[2]);
+      }
+     console.log(cheapestFreights)
           } catch(error){
             
           }
@@ -155,16 +183,27 @@ required
 <div className='correios-options-container'>
 <h1>Escolha uma opção de Envio</h1>
 <p> Retirada em Brasília? 
-<div class="checkbox-container">
-  <label class="custom-checkbox">
-    <input type="checkbox" />
-    <span class="checkmark"></span>
+<div className="checkbox-container">
+  <label className="custom-checkbox">
+    <input
+      type="radio"
+      name="retirada"
+      onChange={() => setBsbInput(false)}
+      checked={bsbInput === false}
+    />
+    <span className="checkmark"></span>
     Sim
   </label>
-  <label class="custom-checkbox">
-    <input type="checkbox" onClick={() => setBsbInput((prev) => !prev)}/>
-    <span class="checkmark" ></span>
-    Não
+  
+  <label className="custom-checkbox">
+    <input
+      type="radio"
+      name="retirada"
+      onChange={() => setBsbInput(true)}
+      checked={bsbInput === true}
+    />
+    <span className="checkmark"></span>
+    Não 
   </label>
 </div>
   
@@ -176,14 +215,59 @@ required
 
 </div>
 )}
-{bsbInput && (
+{bsbInput === true && (
   <>
-  <p className='text-buttons-freight'>Mini Envios: <button  className='selected-option'></button></p> 
-<p className='text-buttons-freight'>Sedex: <button className='selected-option'></button></p>
-<p className='text-buttons-freight'>Pac: <button className='selected-option'></button></p>
-</>
+    <p className='text-buttons-freight1'>
+      {`${shipping1.name} || R$: ${shipping1.price} `}
+      <input
+        type="radio"
+        name="frete"
+        value={shipping1.price}
+        onChange={() => setFreightValor(shipping1.price)}
+      />
+    </p>
 
+    <p className='text-buttons-freight2'>
+      {`${shipping2.name} || R$: ${shipping2.price} `}
+      <input
+        type="radio"
+        name="frete"
+        value={shipping2.price}
+        onChange={() => setFreightValor(shipping2.price)}
+      />
+    </p>
+
+    <p className='text-buttons-freight3'>
+      {`${shipping3.name} || R$: ${shipping3.price} `}
+      <input
+        type="radio"
+        name="frete"
+        value={shipping3.price}
+        onChange={() => setFreightValor(shipping3.price)}
+      />
+    </p>
+  </>
 )}
+
+
+{bsbInput === false && (
+  <p className='pickup-message'>Após o pagamento ser aprovado, entraremos em contato!</p>
+)}
+
+<div>
+ 
+  <p className='total-value'>Valor Total: {`R$ ${(bsbInput === true
+    ? Number(valueOnCart) + Number(freightValor)
+    : Number(valueOnCart)).toFixed(2)}`}
+    </p>
+ 
+  <button className='payment-button'>
+    <p> Prosseguir para o Pagamento</p>
+</button>
+
+</div>
+
+
 
 
 </div>

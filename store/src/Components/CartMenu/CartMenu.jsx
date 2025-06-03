@@ -1,5 +1,5 @@
 // CartMenu.jsx
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AppContext from '../../context/AppContext';
 import { BsFillCartXFill } from "react-icons/bs";
 import { IoMdCloseCircle } from "react-icons/io";
@@ -7,6 +7,7 @@ import { FaTrash } from "react-icons/fa";
 import './CartMenu.css';
 import { Link } from 'react-router-dom';
 const CartMenu = () => {
+ 
   const { itemsCart, setItemsCart, cartMenu, toggleCart, isLogged, setIsLogged } = useContext(AppContext);
 
   const updateQuantity = (idx, delta) => {
@@ -28,7 +29,10 @@ const CartMenu = () => {
     const price = typeof item.price === 'string'
       ? parseFloat(item.price.replace(/[^0-9.,]/g, '').replace(',', '.'))
       : item.price;
-    return sum + price * item.quantity;
+      const totalValueCart = sum + price * item.quantity;
+      
+    return totalValueCart;
+
   }, 0);
 
   const removeItem = (idx) => {
@@ -36,7 +40,10 @@ const CartMenu = () => {
     setItemsCart(updatedItems);
     localStorage.setItem('cart', JSON.stringify(updatedItems))
   };
-  
+  const toggleTotalValueCart = () => {
+    localStorage.setItem('totalValueCart', total.toFixed(2));
+  }
+
   return (
     <div className={cartMenu ? 'cart-menu-open' : 'cart-menu-close'}>
       <div className={cartMenu ? 'empty-cart-open' : 'empty-cart-close'}>
@@ -120,7 +127,7 @@ const CartMenu = () => {
             <div className='cart-button-pay-container'>
 
              {isLogged ? 
-             <Link to='/freight'><button className='cart-button-pay'>Finalizar Compra</button></Link> : <Link to='/login'><button className='cart-button-pay'>Finalizar Compra</button></Link> 
+             <Link to='/freight'><button  onClick={toggleTotalValueCart}className='cart-button-pay'>Finalizar Compra</button></Link> : <Link to='/login'><button className='cart-button-pay'>Finalizar Compra</button></Link> 
             
             }
     
