@@ -7,7 +7,9 @@ const path = require('path');
 const app = express();
 const port = 3001;
 const jwtModules = require ('../backend/jwt');
+const { MercadoPagoConfig, Preference } = require('mercadopago');
 require('dotenv').config();
+
 
 // Minhas credenciais
 const username = process.env.MONGODB_USERNAME;
@@ -15,6 +17,7 @@ const password = process.env.MONGODB_PASSWORD;
 const usernameGmail = process.env.GMAIL_USERNAME;
 const passwordGmail = process.env.PASSWORD_USERNAME;
 const cepNordic = process.env.NORDIC_CEP;
+const testTokenMercadoPago = process.env.MERCADO_PAGO_TEST_TOKEN;
 
 // Conexão com o banco de dados
 const connectToDataBase = async () => {
@@ -342,6 +345,54 @@ app.use(express.static(path.join(__dirname, '../store/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../store/build', 'index.html'));
 });
+
+// Mercado Pago
+const client = new MercadoPagoConfig({
+  accessToken: testTokenMercadoPago,
+  options: { timeout: 5000 },
+});
+
+// Minha rota do Mercado Pago
+app.post('/create-order', async (req, res) => {
+  const { cartItems, totalValue } = req.body;
+
+  try {
+    const preference = new Preference(client);
+
+    const items = cartItems.map(item => ({
+      id: item.id,
+      title: item.title,
+      quantity: item.quantity,
+      unit_price: Number(item.price.replace('R$', '').trim()),
+      currency_id: 'BRL',
+      picture_url: item.img,
+    }));
+
+    const body = {
+      items,
+      back_urls: {
+        //Preciso pensar em como incluir o ambiente de producao e o de homologacao. Talvez declarando uma nova variavel no onrender no formato do dotenv e no dotenv de desenvolvimento, a mesma variavel tenha um valor diferente...
+        success: 'http://localhost:3000/success',
+        failure: 'http://localhost:3000/failure',
+        pending: 'http://localhost:3000/pending',
+      }//,
+      //auto_return: 'approved',
+    };
+
+    const result = await preference.create({ body });
+
+    return res.json({
+      id: result.id,
+      init_point: result.init_point, // URL para redirecionar o usuário
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Erro ao criar ordem' });
+  }
+});
+
+
 
 // Iniciar o servidor
 app.listen(port, () => {
