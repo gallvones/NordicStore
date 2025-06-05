@@ -63,7 +63,7 @@ element: <App/>
   element: <Freight/>
 },
 {
-  path: "/sucess",
+  path: "/success",
   element: <Sucess/>
 },
 {
