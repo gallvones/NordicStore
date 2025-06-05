@@ -96,13 +96,12 @@ const Freight = () => {
     }
   };
 
-  const sendToPayment = () => {
-    const totalValue = Number(valueOnCart) + Number(freightValor);
-    localStorage.setItem('totalValue', totalValue);
-  };
+
 
   const handlePayment = async () => {
-  
+  const valueCartPlusFreight = Number(valueOnCart) + Number(freightValor);
+  localStorage.setItem('totalValue', valueCartPlusFreight)
+    
     const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
     const totalValue = localStorage.getItem('totalValue');
 
@@ -259,6 +258,7 @@ const Freight = () => {
                 onChange={() => {
                   setFreightValor(shipping1.price);
                   setCheckShiping(true);
+
                 }}
               />
             </p>
@@ -311,8 +311,7 @@ const Freight = () => {
           { (bsbInput === false || (bsbInput === true && checkShiping !== null)) && (
             <button
               className="payment-button"
-              onClick={() => {
-                sendToPayment();
+              onClick={() =>  {
                 handlePayment();
               }}
             >

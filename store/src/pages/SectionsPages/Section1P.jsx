@@ -9,11 +9,11 @@ const Section1P = () => {
     
   return (
     <Provider>
-    <div className='all_Section1P'>
+    <div className='all-Section1P'>
 <CartMenu />
      <Header/>
 <div className='body_Section1P'>
-<div className='filterContent_Section1P'>
+<div className='filterContent-Section1P'>
 <SrcBar/>
 </div>
 <hr />

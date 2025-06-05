@@ -18,6 +18,7 @@ import Freight from './pages/Freight/freight.jsx';
 import Sucess from './pages/MercadoPago/Sucess.jsx';
 import Failure from './pages/MercadoPago/Failure.jsx';
 import Pending from './pages/MercadoPago/Pending.jsx';
+import Profile from './pages/Profile/Profile.jsx';
 
 
 
@@ -73,6 +74,10 @@ element: <App/>
 {
   path: "/pending",
   element: <Pending/>
+},
+{
+  path: "/profile",
+  element: <Profile/>
 }
  ]);
  

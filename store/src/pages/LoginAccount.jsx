@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useEffect, useState } from 'react';
 import React from 'react';
 import Logo from '../Components/img/logo3.png';
 import '../pages/loginAccount.css';
@@ -13,6 +13,11 @@ const LoginAccount = () => {
   ? 'http://localhost:3001'
   : 'https://nordic-store.onrender.com';
   
+  useEffect(() => {
+    localStorage.removeItem('user')
+  }, []);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     

@@ -14,7 +14,11 @@ const Header = () => {
   const [userName, setUserName] = useState('');
   const [userSurName, setUserSurName] = useState('');
   const [showMenu, setShowMenu] = useState(false);
-
+//Limba o storage
+  useEffect(() => {
+    localStorage.removeItem('freightOption');
+    localStorage.removeItem('totalValue');
+  }, []);
   // Função de logout  
   const handleLogout = useCallback(() => {
     localStorage.removeItem('authToken');

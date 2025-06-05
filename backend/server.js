@@ -57,7 +57,7 @@ app.use(cors({
     
     callback(new Error('Acesso bloqueado por CORS - Origem não permitida: ' + origin));
   },
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT'],
   credentials: true
 }));
 
@@ -158,6 +158,30 @@ try{
   console.error('Erro ao buscar usuários:', error);
   res.status(500).json({ message: 'Erro ao buscar dados'});
 }
+});
+
+app.put('/updateUser', async (req, res) => {
+  const { name, surname, phone, cep, email, id } = req.body;
+
+  try {
+    const existingUser = await FormDataRegister.findById(id);
+    if (!existingUser) {
+      return res.status(404).json({ message: 'Usuário não encontrado!' });
+    }
+    existingUser.name    = name;
+    existingUser.surname = surname;
+    existingUser.phone   = phone;
+    existingUser.cep     = cep;
+    existingUser.mail   = email;
+  await existingUser.save();
+
+    return res.status(200).json({
+      message: 'Dados atualizados com sucesso!',
+    });
+  } catch (error) {
+    console.error('Erro ao atualizar usuário:', error);
+    return res.status(500).json({ message: 'Erro interno ao atualizar usuário' });
+  }
 });
 
 app.post('/usertoken', async (req, res) => {
@@ -357,40 +381,40 @@ app.post('/create-order', async (req, res) => {
   const { cartItems, totalValue } = req.body;
 
   try {
-    const preference = new Preference(client);
-
-    const items = cartItems.map(item => ({
-      id: item.id,
-      title: item.title,
-      quantity: item.quantity,
-      unit_price: Number(item.price.replace('R$', '').trim()),
-      currency_id: 'BRL',
-      picture_url: item.img,
-    }));
+    const items = [
+      {
+        id: 'PedidoNordic',        
+        title: 'Pedido Nordic Store',
+        quantity: 1,
+        unit_price: Number(totalValue),
+        currency_id: 'BRL',
+        picture_url: ''            // imagem para o pedido. Pensei na logo
+      }
+    ];
 
     const body = {
       items,
       back_urls: {
-        //Preciso pensar em como incluir o ambiente de producao e o de homologacao. Talvez declarando uma nova variavel no onrender no formato do dotenv e no dotenv de desenvolvimento, a mesma variavel tenha um valor diferente...
         success: 'https://nordic-store.onrender.com/success',
         failure: 'https://nordic-store.onrender.com/failure',
-        pending: 'https://nordic-store.onrender.com/pending',
+        pending: 'https://nordic-store.onrender.com/pending'
       },
-      auto_return: 'approved',
+      auto_return: 'approved'
     };
 
+    const preference = new Preference(client);
     const result = await preference.create({ body });
 
     return res.json({
       id: result.id,
-      init_point: result.init_point, // URL para redirecionar o usuário
+      init_point: result.init_point
     });
-
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Erro ao criar ordem' });
   }
 });
+
 
 
 

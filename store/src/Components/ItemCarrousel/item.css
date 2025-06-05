@@ -1,6 +1,6 @@
 .all-item1-container {
     width: 100%;
-    height: 50vh;
+    height: 480px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -13,8 +13,6 @@
     flex-direction:column; 
     cursor: pointer;
     position: relative;
-    margin-left: 8%;
-    margin: 0 auto;
     padding: 5px;
 }
 

@@ -1,34 +1,112 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../SrcBar/SrcBar.css'
+import Item from '../ItemCarrousel/item';
 import { IoMdSearch } from "react-icons/io";
-import EduK from "../../Components/img/anuncioeduK.jpeg";
-import Products from '../../Components/Products/Products';
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+const backendURL = window.location.hostname === 'localhost'
+? 'http://localhost:3001'
+: 'https://nordic-store.onrender.com';
 
 const SrcBar = () => {
-  return (
+  const [allShirts, setAllShirts] = useState([]);
+  const [shirts,setShirts] = useState([]);
+  const [status, setStatus] = useState('loading') ;
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    fetch(`${backendURL}/allshirts`)
+      .then(res => {
+        if (!res.ok) throw new Error('Falha ao carregar produtos')
+        return res.json()
+      })
+      .then(data => {
+        setAllShirts(data);
+        setShirts(data.slice(0,4));
+        setStatus('success')
+      })
+      .catch(() => setStatus('error'))
+  }, [])
+  const changingProducts = () => {
     
-    <div className='all_srcbar'>
+  setShirts(allShirts.slice(4, 8));
+  }
+
+  const handleSearchChange = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    // Se o campo estiver vazio, volta a exibir apenas os 4 primeiros
+    if (term.trim() === '') {
+      setShirts(allShirts.slice(0, 4));
+      return;
+    }
+
+    // Filtra todos os itens cujo "brand" contenha o texto digitado (case-insensitive)
+    const filtered = allShirts.filter((shirt) =>
+      shirt.brand?.toLowerCase().includes(term.trim().toLowerCase())
+    );
+    setShirts(filtered);
+  };
+
+  if (status === 'loading') return <div className="loading">Carregando produtos...</div>
+  if (status === 'error')
+
+
+    return (
+      <div className="error">
+        <p>Não foi possível carregar os produtos.</p>
+        <button onClick={() => window.location.reload()}>Tentar novamente</button>
+      </div>
+    )
+
+
+  return (
+    <div className='all-srcbar'>
+    <div className='container-principal'>
         <div className='srcbar_container'>
         <div className='srcbar_header'>
-         <div className='icon_src'><IoMdSearch/></div>
-           <div className='inputsrc'><input  placeholder='Pesquise a marca'>
-           </input>
-           </div>
-           </div>
-           <div className='anuncio_container'>
-             <a href="https://www.google.com.br/?hl=pt-BR" target='blank'><img src={EduK} alt="" className='anuncio_image' /> </a>
-            <a href="https://www.google.com.br/?hl=pt-BR" target='blank'><img src={EduK} alt="" className='anuncio_image' /> </a>
-            <a href="https://www.google.com.br/?hl=pt-BR" target='blank'><img src={EduK} alt="" className='anuncio_image' /> </a> 
+         <div className='icon_src'>
+          <IoMdSearch/>
+          </div>
+           <div className='inputsrc'> <input  placeholder= 'Pesquise a marca' onChange={handleSearchChange}>
             
-          
+           </input>
+           <hr />
            </div>
+           
+           
+           </div>
+           
+           
      </div>
-           <hr  className='vertical-hr'/>
-           <div className='cardproducts_allcontainer'>
-      <Products/>
+           <hr />
+           <div className='cardproducts-allcontainer'>
+            <button className='arrow-button' onClick={() => setShirts(allShirts.slice(0,4))}><IoIosArrowBack /></button>
+            <div className='cardproducts-list'>
+           {shirts.length ? (
+          shirts.map(shirt => (
+            <Item
+              key={shirt._id}
+              ItemValues={{
+                img: shirt.img1,
+                img2: shirt.img2 ?? shirt.img1,
+                title: shirt.description,
+                price: `${shirt.price}`,
+                brand: shirt.brand ?? '',
+                size: shirt.size,
+              }}
+            />
+          ))
+        ) : (
+          <p className="no-items">Nenhum produto disponível</p>
+        )}
+</div>
+<button className='arrow-button' onClick={changingProducts}><IoIosArrowForward />
+</button>
         </div>
     </div>
-   
+    </div>
   )
 }
 
