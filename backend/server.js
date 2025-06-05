@@ -372,11 +372,11 @@ app.post('/create-order', async (req, res) => {
       items,
       back_urls: {
         //Preciso pensar em como incluir o ambiente de producao e o de homologacao. Talvez declarando uma nova variavel no onrender no formato do dotenv e no dotenv de desenvolvimento, a mesma variavel tenha um valor diferente...
-        success: 'http://localhost:3000/success',
-        failure: 'http://localhost:3000/failure',
-        pending: 'http://localhost:3000/pending',
-      }//,
-      //auto_return: 'approved',
+        success: 'https://nordic-store.onrender.com/success',
+        failure: 'https://nordic-store.onrender.com/failure',
+        pending: 'https://nordic-store.onrender.com/pending',
+      },
+      auto_return: 'approved',
     };
 
     const result = await preference.create({ body });
