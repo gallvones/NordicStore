@@ -98,8 +98,8 @@ body: JSON.stringify({
         <Link to="/">
           <img src={Logo} alt="logo" className="imgProfile_logo" />
         </Link>
-        <h1 className="profile_title">Alterar Perfil</h1>
-        <div className="formsLogin_list">
+        <h1 className="profile_title">Alterar Dados</h1>
+        <div className="formsProfile_list">
           <input
             type="text"
             name="name"              
@@ -141,7 +141,7 @@ body: JSON.stringify({
             required
           />
         </div>
-        <button type="submit" className="submitLogin_button">
+        <button type="submit" className="submitProfile_button">
           Enviar
         </button>
       </form>
