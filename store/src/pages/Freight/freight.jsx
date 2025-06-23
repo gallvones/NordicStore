@@ -101,9 +101,26 @@ const Freight = () => {
   const handlePayment = async () => {
   const valueCartPlusFreight = Number(valueOnCart) + Number(freightValor);
   localStorage.setItem('totalValue', valueCartPlusFreight)
-    
     const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
     const totalValue = localStorage.getItem('totalValue');
+    const freightForms = {
+      name,
+      surname,
+      mail,
+      phone,
+      cep,
+      complement,
+      number,
+      bsbInput,
+      shipping1,
+      shipping2,
+      shipping3,
+      freightValor,
+      checkShiping
+    };
+    
+    localStorage.setItem('freightForms', JSON.stringify(freightForms));
+    const storedForms = JSON.parse(localStorage.getItem('freightForms'));
 
     try {
       const response = await fetch(`${backendURL}/create-order`, {
@@ -112,9 +129,24 @@ const Freight = () => {
         body: JSON.stringify({
           cartItems,
           totalValue,
+          storedForms
+          
         }),
       });
+      const responseMail = await fetch (`${backendURL}/pendingMail`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          storedForms
+        }),
 
+      });
+if (!responseMail.ok){
+  const errorMsg = await responseMail.json().catch(() => ({}));
+        console.error('Erro ao notificar a loja:', errorMsg);
+        alert('Falha ao notificar a loja. Tente novamente ou entre em contato!');
+        return;
+}
       if (!response.ok) {
         // Se deu erro, imprime no console e exibe alerta
         const errMsg = await response.json().catch(() => ({}));
@@ -127,7 +159,9 @@ const Freight = () => {
       if (data.init_point) {
         // Redireciona para o checkout do Mercado Pago
         window.location.href = data.init_point;
-      } else {
+      } 
+      
+      else {
         console.error('Resposta inesperada:', data);
         alert('Não foi possível obter o link de pagamento.');
       }
@@ -135,6 +169,7 @@ const Freight = () => {
       console.error('Erro na requisição de pagamento:', error);
       alert('Erro de conexão. Verifique sua internet e tente novamente.');
     }
+    
   };
 
   return (
@@ -257,7 +292,7 @@ const Freight = () => {
                 value={shipping1.price}
                 onChange={() => {
                   setFreightValor(shipping1.price);
-                  setCheckShiping(true);
+                  setCheckShiping(shipping1.name);
 
                 }}
               />
@@ -271,7 +306,7 @@ const Freight = () => {
                 value={shipping2.price}
                 onChange={() => {
                   setFreightValor(shipping2.price);
-                  setCheckShiping(true);
+                  setCheckShiping(shipping2.name);
                 }}
               />
             </p>
@@ -284,7 +319,7 @@ const Freight = () => {
                 value={shipping3.price}
                 onChange={() => {
                   setFreightValor(shipping3.price);
-                  setCheckShiping(true);
+                  setCheckShiping(shipping3.name);
                 }}
               />
             </p>

@@ -1,8 +1,8 @@
-.all-success-page{
+.all-failure-page{
     display: flex;
     flex-direction: column;
 }
-.success-page-container{
+.failure-page-container{
     width: 80%;
     max-width: 500px; 
    height: 500px;
@@ -19,21 +19,21 @@
     left: 50%; 
     transform: translate(-50%, -50%); 
 }
-.img-success-page{
+.img-failure-page{
     width: 250px;
     height: 180px;
     margin-top: 2%;
     cursor: pointer;
 }
-.success-page-message{
+.failure-page-message{
     margin-top: 20px;
 }
-.success-page-message > h2 {
+.failure-page-message > h2 {
     margin-top: 10px;
     color: rgba(138, 194, 207, 1);
 }
-.check-success-container{
+.check-failure-container{
     margin-top: 10px;
     font-size: 30px;
-    color: green;
+    color: red;
 }

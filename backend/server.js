@@ -77,6 +77,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+
 // Rota para pegar informacoes das camisetas
 app.get('/allshirts', async (req, res) => {
   try {
@@ -358,6 +359,7 @@ app.post('/freightCep', async (req,res) => {
 
 app.post('freightDatas', async (req, res) => {
   const {name,surname, mail, phone, cepDestiny,complement,number, paymentStatus } = req.body ;
+
   // Aqui eu preciso receber o status do pagamento e enviar para o meu email ou oq for o status do pedido, com todos os dados recebidos para preparar o pedido e o envio.
   
 })
@@ -378,7 +380,7 @@ const client = new MercadoPagoConfig({
 
 // Minha rota do Mercado Pago
 app.post('/create-order', async (req, res) => {
-  const { cartItems, totalValue } = req.body;
+  const { cartItems, totalValue} = req.body;
 
   try {
     const items = [
@@ -414,7 +416,93 @@ app.post('/create-order', async (req, res) => {
     return res.status(500).json({ error: 'Erro ao criar ordem' });
   }
 });
+app.post('/pendingMail', async (req, res) => {
+  try {
+    const {
+      name,
+      surname,
+      mail,
+      phone,
+      cep,
+      complement,
+      number,
+      bsbInput,
+      shipping1,
+      shipping2,
+      shipping3,
+      freightValor,
+      checkShiping
+    } = req.body.storedForms;
 
+    // Email para a loja
+    const storeMailOptions = {
+      from: usernameGmail,
+      to: usernameGmail,
+      subject: `Novo pedido pendente - Nordic Store`,
+      html: `
+        <h3>Detalhes do pedido pendente</h3>
+        <p><strong>Cliente:</strong> ${name} ${surname}</p>
+        <p><strong>Email:</strong> ${mail}</p>
+        <p><strong>Telefone:</strong> ${phone}</p>
+        <p><strong>Endereço:</strong> ${cep}, ${number}, ${complement}</p>
+        <p><strong>Fretes:</strong></p>
+        <p><strong>Frete escolhido:</strong> ${checkShiping}</p>
+        <p><strong>Valor do frete:</strong> R$ ${freightValor}</p>
+      `,
+    };
+
+    // Email para o cliente
+    const clientMailOptions = {
+      from: usernameGmail,
+      to: mail,
+      subject: `Pedido recebido - Nordic Store`,
+      html: `
+        <h2>Olá, ${name}!</h2>
+        <p>Recebemos seu pedido e ele está pendente de confirmação de pagamento.</p>
+        <p>Assim que o pagamento for confirmado, daremos início à preparação e envio do seu pedido.</p>
+        <h3>Resumo dos dados:</h3>
+        <ul>
+          <li><strong>Nome:</strong> ${name} ${surname}</li>
+          <li><strong>Telefone:</strong> ${phone}</li>
+          <li><strong>Endereço:</strong> ${cep}, ${number}, ${complement}</li>
+          <li><strong>Frete escolhido:</strong> ${checkShiping} - R$ ${freightValor}</li>
+        </ul>
+        <p>Qualquer dúvida, estamos à disposição!</p>
+        <p><strong>Nordic Store</strong></p>
+      `,
+    };
+
+    // Enviar e-mails
+    transporter.sendMail(storeMailOptions, (err, info) => {
+      if (err) {
+        console.error('Erro ao enviar e-mail para loja:', err);
+      } else {
+        console.log('E-mail enviado para loja:', info.response);
+      }
+    });
+
+    transporter.sendMail(clientMailOptions, (err, info) => {
+      if (err) {
+        console.error('Erro ao enviar e-mail para cliente:', err);
+      } else {
+        console.log('E-mail enviado para cliente:', info.response);
+      }
+    });
+
+    return res.status(200).json({ message: 'E-mails enviados com sucesso!' });
+  } catch (error) {
+    console.error('Erro na rota /pendingMail:', error);
+    return res.status(500).json({ error: 'Erro ao processar envio de e-mails.' });
+  }
+});
+
+
+app.post('/successMail', async (req,res) => {
+  const{name, surname, email, phone, cep } = req.body;
+
+
+
+})
 
 
 
