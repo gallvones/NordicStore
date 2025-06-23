@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import './SlideShow.css';
+import Banner from '../img/modeloBanner.png'
 //Slide
 import { register } from 'swiper/element/bundle';
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -17,9 +18,9 @@ const SlideShow = () => {
 const {cartMenu} = useContext(AppContext);
 
 const imgs = [
-  { id: '1', Image: ''},
-  { id: '2', Image: ''},
-  { id: '3', Image: ''},
+  { id: '1', Image: `${Banner}`},
+  { id: '2', Image: `${Banner}`},
+  { id: '3', Image: `${Banner}`},
 ]
 
   return (
