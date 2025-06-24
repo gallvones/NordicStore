@@ -431,8 +431,24 @@ app.post('/pendingMail', async (req, res) => {
       shipping2,
       shipping3,
       freightValor,
-      checkShiping
+      checkShiping, 
+      totalValue
     } = req.body.storedForms;
+
+    const cartItems = req.body.cartItems;
+
+    // Geração dos produtos em HTML
+    const produtosHTML = Array.isArray(cartItems)
+      ? cartItems.map(item => `
+        <div style="border-bottom:1px solid #ddd; margin-bottom:10px; padding-bottom:10px;">
+          <img src="${item.img}" alt="${item.title}" style="width:100px; height:auto; border-radius:4px;" />
+          <p><strong>${item.title}</strong></p>
+          <p>Tamanho: ${item.size}</p>
+          <p>Preço: ${item.price}</p>
+          <p>Quantidade: ${item.quantity}</p>
+        </div>
+      `).join('')
+      : '<p>Nenhum item no carrinho.</p>';
 
     // Email para a loja
     const storeMailOptions = {
@@ -444,10 +460,12 @@ app.post('/pendingMail', async (req, res) => {
         <p><strong>Cliente:</strong> ${name} ${surname}</p>
         <p><strong>Email:</strong> ${mail}</p>
         <p><strong>Telefone:</strong> ${phone}</p>
-        <p><strong>Endereço:</strong> ${cep}, ${number}, ${complement}</p>
-        <p><strong>Fretes:</strong></p>
+        <p><strong>Endereço:</strong> ${cep}, ${complement}, ${number}</p>
         <p><strong>Frete escolhido:</strong> ${checkShiping}</p>
         <p><strong>Valor do frete:</strong> R$ ${freightValor}</p>
+        <p><strong>Valor Total:</strong> R$ ${totalValue}</p>
+        <h3>Itens do carrinho:</h3>
+        ${produtosHTML}
       `,
     };
 
@@ -466,7 +484,10 @@ app.post('/pendingMail', async (req, res) => {
           <li><strong>Telefone:</strong> ${phone}</li>
           <li><strong>Endereço:</strong> ${cep}, ${number}, ${complement}</li>
           <li><strong>Frete escolhido:</strong> ${checkShiping} - R$ ${freightValor}</li>
+          <li><strong>Valor total: </strong> R$ ${totalValue}</li>
         </ul>
+        <h3>Itens do seu pedido:</h3>
+        ${produtosHTML}
         <p>Qualquer dúvida, estamos à disposição!</p>
         <p><strong>Nordic Store</strong></p>
       `,
@@ -497,12 +518,190 @@ app.post('/pendingMail', async (req, res) => {
 });
 
 
-app.post('/successMail', async (req,res) => {
-  const{name, surname, email, phone, cep } = req.body;
+app.post('/successMail', async (req, res) => {
+  const { totalValueOrder, storedForms, cartItems } = req.body;
+
+  if (!storedForms || !totalValueOrder || !cartItems) {
+    return res.status(400).json({ error: 'Dados incompletos.' });
+  }
+
+  const {
+    name,
+    surname,
+    mail,
+    phone,
+    cep,
+    complement,
+    number,
+    checkShiping,
+    freightValor
+  } = storedForms;
+
+  // Map dos produtos
+  const produtosHTML = Array.isArray(cartItems)
+    ? cartItems.map(item => `
+      <div style="border-bottom:1px solid #ddd; margin-bottom:10px; padding-bottom:10px;">
+        <img src="${item.img}" alt="${item.title}" style="width:100px; height:auto; border-radius:4px;" />
+        <p><strong>${item.title}</strong></p>
+        <p>Tamanho: ${item.size}</p>
+        <p>Preço: ${item.price}</p>
+        <p>Quantidade: ${item.quantity}</p>
+      </div>
+    `).join('')
+    : '<p>Nenhum item no carrinho.</p>';
+
+  const clienteHTML = `
+    <h2>Olá, ${name}!</h2>
+    <p>Seu pagamento foi confirmado com sucesso!</p>
+    <p>Resumo do pedido:</p>
+    <ul>
+      <li><strong>Nome:</strong> ${name} ${surname}</li>
+      <li><strong>Telefone:</strong> ${phone}</li>
+      <li><strong>Endereço:</strong> ${cep}, ${number}, ${complement}</li>
+      <li><strong>Frete escolhido:</strong> ${checkShiping} - R$ ${freightValor}</li>
+      <li><strong>Valor total da compra:</strong> R$ ${totalValueOrder}</li>
+    </ul>
+    <h3>Itens do seu pedido:</h3>
+    ${produtosHTML}
+    <p>Seu pedido está em processo de separação e logo será enviado pra você!</p>
+    <p>Qualquer dúvida, estamos à disposição!</p>
+    <br/>
+    <p><strong>Equipe Nordic Store</strong></p>
+  `;
+
+  const lojaHTML = `
+    <h2>Novo Pedido Aprovado com Pagamento Confirmado!</h2>
+    <p>Dados do cliente:</p>
+    <ul>
+      <li><strong>Nome:</strong> ${name} ${surname}</li>
+      <li><strong>E-mail:</strong> ${mail}</li>
+      <li><strong>Telefone:</strong> ${phone}</li>
+      <li><strong>Endereço:</strong> ${cep}, ${number}, ${complement}</li>
+      <li><strong>Frete:</strong> ${checkShiping} - R$ ${freightValor}</li>
+      <li><strong>Total do pedido:</strong> R$ ${totalValueOrder}</li>
+    </ul>
+    <h3>Itens do pedido:</h3>
+    ${produtosHTML}
+  `;
+
+  const mailToClient = {
+    from: process.env.GMAIL_USERNAME,
+    to: mail,
+    subject: 'Pedido confirmado - Nordic Store',
+    html: clienteHTML,
+  };
+
+  const mailToStore = {
+    from: process.env.GMAIL_USERNAME,
+    to: process.env.GMAIL_USERNAME,
+    subject: `Novo Pedido Confirmado: ${name} ${surname}`,
+    html: lojaHTML,
+  };
+
+  try {
+    await transporter.sendMail(mailToClient);
+    await transporter.sendMail(mailToStore);
+
+    return res.status(200).json({ message: 'E-mails enviados com sucesso.' });
+  } catch (error) {
+    console.error('Erro ao enviar e-mails de confirmação:', error);
+    return res.status(500).json({ error: 'Falha ao enviar e-mails.' });
+  }
+});
 
 
 
-})
+app.post('/failureMail', async (req, res) => {
+  const { totalValueOrder, storedForms, cartItems } = req.body;
+
+  if (!storedForms || !totalValueOrder || !cartItems) {
+    return res.status(400).json({ error: 'Dados incompletos.' });
+  }
+
+  const {
+    name,
+    surname,
+    mail,
+    phone,
+    cep,
+    complement,
+    number,
+    checkShiping,
+    freightValor
+  } = storedForms;
+
+  // HTML dos produtos
+  const produtosHTML = Array.isArray(cartItems)
+    ? cartItems.map(item => `
+      <div style="border-bottom:1px solid #ccc; margin-bottom:10px; padding-bottom:10px;">
+        <img src="${item.img}" alt="${item.title}" style="width:100px; height:auto; border-radius:4px;" />
+        <p><strong>${item.title}</strong></p>
+        <p>Tamanho: ${item.size}</p>
+        <p>Preço: ${item.price}</p>
+        <p>Quantidade: ${item.quantity}</p>
+      </div>
+    `).join('')
+    : '<p>Nenhum item no carrinho.</p>';
+
+  const clienteHTML = `
+    <h2>Olá, ${name}!</h2>
+    <p>Recebemos seu pedido, mas infelizmente o pagamento <strong>não foi aprovado</strong>.</p>
+    <p>Resumo do pedido:</p>
+    <ul>
+      <li><strong>Nome:</strong> ${name} ${surname}</li>
+      <li><strong>Telefone:</strong> ${phone}</li>
+      <li><strong>Endereço:</strong> ${cep}, ${number}, ${complement}</li>
+      <li><strong>Frete escolhido:</strong> ${checkShiping} - R$ ${freightValor}</li>
+      <li><strong>Valor total da tentativa de compra:</strong> R$ ${totalValueOrder}</li>
+    </ul>
+    <h3>Itens do carrinho:</h3>
+    ${produtosHTML}
+    <p>Caso deseje tentar novamente, você pode refazer o processo pelo nosso site ou entrar em contato conosco pelo número <strong>(61)99983-1708</strong></p>
+    <p>Estamos à disposição para qualquer dúvida ou ajuda!</p>
+    <br/>
+    <p><strong>Equipe Nordic Store</strong></p>
+  `;
+
+  const lojaHTML = `
+    <h2>Pagamento Recusado - Pedido não concluído</h2>
+    <p>O cliente abaixo tentou realizar uma compra, mas o pagamento foi recusado:</p>
+    <ul>
+      <li><strong>Nome:</strong> ${name} ${surname}</li>
+      <li><strong>E-mail:</strong> ${mail}</li>
+      <li><strong>Telefone:</strong> ${phone}</li>
+      <li><strong>Endereço:</strong> ${cep}, ${number}, ${complement}</li>
+      <li><strong>Frete escolhido:</strong> ${checkShiping} - R$ ${freightValor}</li>
+      <li><strong>Valor total da tentativa:</strong> R$ ${totalValueOrder}</li>
+    </ul>
+    <h3>Itens do carrinho:</h3>
+    ${produtosHTML}
+  `;
+
+  const mailToClient = {
+    from: process.env.GMAIL_USERNAME,
+    to: mail,
+    subject: 'Pagamento não aprovado - Nordic Store',
+    html: clienteHTML,
+  };
+
+  const mailToStore = {
+    from: process.env.GMAIL_USERNAME,
+    to: process.env.GMAIL_USERNAME,
+    subject: `Pagamento Recusado: ${name} ${surname}`,
+    html: lojaHTML,
+  };
+
+  try {
+    await transporter.sendMail(mailToClient);
+    await transporter.sendMail(mailToStore);
+
+    return res.status(200).json({ message: 'E-mails enviados com sucesso.' });
+  } catch (error) {
+    console.error('Erro ao enviar e-mails de falha de pagamento:', error);
+    return res.status(500).json({ error: 'Falha ao enviar e-mails.' });
+  }
+});
+
 
 
 

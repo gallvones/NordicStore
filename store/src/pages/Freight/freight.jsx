@@ -9,6 +9,8 @@ const Freight = () => {
   useEffect(() => {
     const userDatas = localStorage.getItem('user');
     localStorage.removeItem('freightOption');
+    localStorage.removeItem('freightForms');
+    localStorage.removeItem('totalValue');
     if (userDatas) {
       const user = JSON.parse(userDatas);
 
@@ -99,10 +101,10 @@ const Freight = () => {
 
 
   const handlePayment = async () => {
-  const valueCartPlusFreight = Number(valueOnCart) + Number(freightValor);
-  localStorage.setItem('totalValue', valueCartPlusFreight)
-    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
-    const totalValue = localStorage.getItem('totalValue');
+    const valueCartPlusFreight = Number(valueOnCart) + Number(freightValor);
+    const totalValue = valueCartPlusFreight;
+  
+    // Cria o objeto do formulário
     const freightForms = {
       name,
       surname,
@@ -116,61 +118,68 @@ const Freight = () => {
       shipping2,
       shipping3,
       freightValor,
-      checkShiping
+      checkShiping,
+      totalValue
     };
-    
+  
+    // Salva no localStorage antes de qualquer requisição
     localStorage.setItem('freightForms', JSON.stringify(freightForms));
-    const storedForms = JSON.parse(localStorage.getItem('freightForms'));
-
+    localStorage.setItem('totalValue', totalValue);
+    localStorage.setItem('cart', JSON.stringify(JSON.parse(localStorage.getItem('cart') || '[]')));
+  
+    const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+  
     try {
+      // Requisição para criar ordem
       const response = await fetch(`${backendURL}/create-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           cartItems,
           totalValue,
-          storedForms
-          
+          storedForms: freightForms,
         }),
       });
-      const responseMail = await fetch (`${backendURL}/pendingMail`, {
+  
+      // Envia email pendente
+      const responseMail = await fetch(`${backendURL}/pendingMail`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          storedForms
+          storedForms: freightForms,
+          cartItems:cartItems,
         }),
-
       });
-if (!responseMail.ok){
-  const errorMsg = await responseMail.json().catch(() => ({}));
+  
+      if (!responseMail.ok) {
+        const errorMsg = await responseMail.json().catch(() => ({}));
         console.error('Erro ao notificar a loja:', errorMsg);
         alert('Falha ao notificar a loja. Tente novamente ou entre em contato!');
         return;
-}
+      }
+  
       if (!response.ok) {
-        // Se deu erro, imprime no console e exibe alerta
         const errMsg = await response.json().catch(() => ({}));
         console.error('Erro ao criar ordem:', errMsg);
         alert('Falha ao iniciar pagamento. Tente novamente.');
         return;
       }
-
+  
       const data = await response.json();
       if (data.init_point) {
-        // Redireciona para o checkout do Mercado Pago
+        // Redireciona para checkout do Mercado Pago
         window.location.href = data.init_point;
-      } 
-      
-      else {
+      } else {
         console.error('Resposta inesperada:', data);
         alert('Não foi possível obter o link de pagamento.');
       }
+  
     } catch (error) {
       console.error('Erro na requisição de pagamento:', error);
       alert('Erro de conexão. Verifique sua internet e tente novamente.');
     }
-    
   };
+  
 
   return (
     <div className="freight-all- container">
@@ -333,15 +342,19 @@ if (!responseMail.ok){
         )}
 
         <div>
-          <p className="total-value">
-            Valor Total:{' '}
-            {`R$ ${
-              bsbInput === true
-                ? Number(valueOnCart) + Number(freightValor)
-                : Number(valueOnCart)
-            }
-            `.trim()}
-          </p>
+        <p className="total-value">
+  Valor Total:{' '}
+  {`R$ ${
+    (
+      bsbInput === true
+        ? Number(valueOnCart) + Number(freightValor)
+        : Number(valueOnCart)
+    )
+    .toFixed(2)
+    .replace('.', ',')
+  }`}
+</p>
+
 
           { (bsbInput === false || (bsbInput === true && checkShiping !== null)) && (
             <button
