@@ -59,7 +59,7 @@ color: #f1f1f1;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    overflow-y: auto;
     
 }
 .cardproducts3-list{
