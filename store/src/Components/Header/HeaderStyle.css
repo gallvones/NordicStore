@@ -76,7 +76,7 @@ cursor: pointer;
 
 .login-menu-container{
     position: relative;
-  display: inline-flex;       /* ou flex, como preferir */
+  display: inline-flex;       
   align-items: center;
   cursor: pointer;
 }
@@ -124,5 +124,28 @@ cursor: pointer;
   }
   
 
-
-
+@media (max-width: 920px){
+  .header_container{
+    flex-direction: column;
+    height: 25vh;
+  }
+  
+  .logo >img{
+    margin-top: -20px;
+    height: 100px;
+    width: 150px;
+    
+  }
+  .anchors{
+margin-top: -30px;
+  }
+  .items_anchors{
+    gap: 20px ;
+    font-size: 1.4rem;
+  }
+  .icons{
+    margin-left: 0;
+    gap: 10px ;
+    
+  }
+}
