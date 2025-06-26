@@ -1,6 +1,8 @@
 .slide{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  margin: 0 auto;
   height: 50vh;
   max-height: 50vh;
   margin-top: 200px;
@@ -9,19 +11,26 @@
 
 .slide-with-cart-open{
   width: 100%;
-  margin: 0 auto;
   height: 50vh;
   max-height: 50vh;
 }
 
-.slide__item {
-  width: 65%;
-  height: 40vh;
-  margin-left: 18%;
-  padding: 0.3rem;
-  border: solid 3px rgba(94, 128, 137, 1); 
-  border-radius: 30px;
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
+  max-height: 350px;
+ 
 
+}
+.banner-img{
+  border: solid 3px rgba(94, 128, 137, 1); 
+  height: 350px;
+  width: 90%;
+  max-width: 1000px;
+  min-width: 600px;
+  border-radius: 30px;
 }
 
 

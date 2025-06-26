@@ -62,7 +62,7 @@ const Section2 = () => {
       </div>
 
       <div className="btn_container3">
-        <Link to="/section2">
+        <Link to="/section3">
           <SectionButton />
         </Link>
       </div>

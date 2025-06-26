@@ -112,7 +112,7 @@ const Header = () => {
           <div onClick={toggleCart}><CartButton /></div>
         </div>
       </div>
-      <hr />
+      <hr  className='hr-header'/>
     </div>
   );
 };
