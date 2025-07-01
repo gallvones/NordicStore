@@ -31,7 +31,6 @@ const Footer = () => {
  <div className='youtubeIcon_list2_footer'> <Youtube/><p>Youtube</p></div>
   <div className='tiktokIcon_list2_footer'><TikTok/><p>TikTok</p></div>
     </div>
-
     <div className='list3_footer'>
      <div><h2>Políticas </h2></div>
      <div><p>Política de Cookies</p></div>

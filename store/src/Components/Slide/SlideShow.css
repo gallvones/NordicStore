@@ -3,16 +3,19 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 50vh;
-  max-height: 50vh;
-  margin-top: 200px;
+  height: 460px;
+ max-height: 450px;
+  margin-top: 180px;
   
 }
 
 .slide-with-cart-open{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 50vh;
-  max-height: 50vh;
+  height: 380px;
+  
 }
 
 .image-container {
@@ -21,7 +24,7 @@
   justify-content: center;
   min-height: 350px;
   max-height: 350px;
- 
+  
 
 }
 .banner-img{
@@ -31,6 +34,34 @@
   max-width: 1000px;
   min-width: 600px;
   border-radius: 30px;
+}
+
+@media (max-width: 970px){
+  .slide{
+    margin-top: 220px;
+    
+  }
+  
+  .slide-with-cart-open{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 380px;
+    
+  }
+}
+@media (max-width: 850px){
+  .slide{
+    display: none;
+  }
+  
+  .slide-with-cart-open{
+    display: none;
+    
+  }
+ 
+ 
 }
 
 

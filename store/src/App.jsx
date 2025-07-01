@@ -28,7 +28,6 @@ function App() {
     <Section1/>
     <hr/>
    {/* <Section2/> */}
-   <hr/>
    <Section3/>
    <hr/>
     </div>

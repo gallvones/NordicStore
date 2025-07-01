@@ -1,44 +1,106 @@
-.all-elements{
-display: flex;
-flex-direction: column;
-min-height: 600px;
-
-}
-.section1-title{
+.all-elements {
     display: flex;
-flex-direction: column;
+    flex-direction: column;
+    min-height: 600px;
+  }
+  
+  .section1-title {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
     margin-bottom: -20px;
-}
-.section1-title > h2{
+  }
+  
+  .section1-title > h2 {
     color: white;
     letter-spacing: 2px;
     font-size: 1.5rem;
-    font-weight:normal;
-}
-.section1-title > p {
-color: rgba(138, 194, 207, 1);
-font-size: 1.5rem;
-font-weight:normal ;
-letter-spacing: 2px;
-margin-top: 5px;
-}
-.all-items{
+    font-weight: normal;
+  }
+  
+  .section1-title > p {
+    color: rgba(138, 194, 207, 1);
+    font-size: 1.5rem;
+    font-weight: normal;
+    letter-spacing: 2px;
+    margin-top: 5px;
+  }
+  
+  .all-items {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
-    margin-left: 4%;
-    margin-right: 4%;
-    margin-top: 4%;
-    
-}
-.btn_container{
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 2%;
-margin-top: -50px;
-}
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+  }
+  
 
+  @media (max-width: 1200px) {
+    .all-items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  
+  @media (max-width: 860px) {
+    .all-elements{
+        margin-top: 220px;
+    }
+    .all-items {
+      grid-template-columns: repeat(2, 1fr);
+      
+    }
+  }
+  
+  
+  @media (max-width: 600px) {
+   .all-elements{
+    margin-top: 250px;
+   }
+    .all-items {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+ 
+  
+  @media (min-width: 1320px) {
+    .all-items {
+      margin-left: 180px;
+      margin-right: 200px;
+    }
+  }
+  
+  @media (min-width: 1610px) {
+    .all-items {
+      margin-left: 250px;
+      margin-right: 250px;
+    }
+  }
+  
+  @media (min-width: 1800px) {
+    .all-items {
+      margin-left: 300px;
+      margin-right: 300px;
+    }
+  }
+  
+  @media (min-width: 2000px) {
+    .all-items {
+      margin-left: 500px;
+      margin-right: 500px;
+    }
+  }
+  
+  .btn_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -50px;
+    margin-bottom: 20px;
+  }
+  

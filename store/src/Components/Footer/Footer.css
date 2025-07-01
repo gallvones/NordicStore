@@ -1,12 +1,13 @@
 
 .container_footer {
     display: flex;
+    justify-content: center;
     color: #f1f1f1;
-   gap: 8%;
-   margin: 4%;
-   margin-left: 6%;
-   margin-right: 6%;
+    min-height: 230px;
+    margin-top: 20px;
+   gap: 40px;
    letter-spacing: 2px;
+   flex-wrap: wrap;
 }
 
 
@@ -24,7 +25,7 @@
 .list1_footer > div > p {
     font-size:0.9rem;
     color: #c9c7c7;
-    margin-top: 3%;
+    margin-top: 10px;
     margin-left: 5px;
 }
 
@@ -38,7 +39,7 @@
     background: none;
     cursor: pointer;
     position: relative;
-    margin-left: -2.5%;
+    margin-left: -6px;
     color: white;
     cursor:pointer;
 }
@@ -50,6 +51,7 @@
 /* Second List*/
 .list2_footer > div{
     display: flex;
+    
 }
 .list2_footer > div >h2 {
     font-size:1.7rem;
@@ -59,12 +61,12 @@
 .list2_footer > div > p {
     font-size:0.9rem;
     color: #c9c7c7;
-    margin-top: 3%;
+    margin-top: 10px;
     
     
 }
 .instaIcon_list2_footer{
-    margin-left: -4%;
+    margin-left: -8px;
 }
 .zapIcon_list2_footer{
     font-size: 1.5rem;
@@ -76,7 +78,7 @@
     background: none;
     cursor: pointer;
     position: relative;
-    margin-left: -4%;
+    margin-left: -8px;
     color: white;
     cursor:pointer;
 }
@@ -85,14 +87,15 @@
 }
 
 .youtubeIcon_list2_footer{
-    margin-left: -13.5%;
+    margin-left: -27px;
 }
 
 .tiktokIcon_list2_footer{
-    margin-left: -14.1%;
+    margin-left: -27px;
 }
 
 /* Third List*/
+
 .list3_footer > div >h2 {
     font-size:1.7rem;
     margin-bottom: 0.8rem;
@@ -101,7 +104,7 @@
 .list3_footer > div >p {
     font-size:0.9rem;
     color: #c9c7c7;
-    margin-top: 6%;
+    margin-top: 10px;
     
 }
 
@@ -119,7 +122,7 @@
 .list4_footer > div >p {
     font-size:0.9rem;
     color: #c9c7c7;
-    margin-top: 6%;
+    margin-top: 10px;
     
 }
 
@@ -128,7 +131,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 10vh;
+    height: 100px;
+    margin-top: 20px;
+    max-height: 100px;
     background-color: rgb(66, 91, 98);
     color: #f1f1f1;
     letter-spacing: 2px;
@@ -137,11 +142,50 @@
     color: rgba(138, 194, 207, 1);
     font-size:1.1rem ;
     background-color: rgb(66, 91, 98);
-    margin-left: 0.5%;
+    margin-left: 5px;
 }
 .container_copyright >p {
-    margin-left: 0.5%;
+    margin-left: 5px;
     background-color: rgb(66, 91, 98);
  font-size: 0.9rem;
  color: #c9c7c7;
+}
+@media (max-width:970px){
+    .list1_footer > div > h2 {
+        font-size: 1.5rem;
+    }
+    .list1_footer > div > p {
+        font-size: 0.8rem;
+    }
+    .list2_footer > div > h2 {
+        font-size: 1.5rem;
+    }
+    .list2_footer > div > p {
+        font-size: 0.8rem;
+    }
+    .list3_footer > div > h2 {
+        font-size: 1.5rem;
+    }
+    .list3_footer > div > p {
+        font-size: 0.8rem;
+    }
+    .list4_footer > div > h2 {
+        font-size: 1.5rem;
+    }
+    .list4_footer > div > p {
+        font-size: 0.8rem;
+    }
+
+}
+@media (max-width: 700px) {
+    .container_copyright{
+        height: 70px;
+        flex-wrap: wrap;
+    }
+    .container_copyright > h2{
+font-size: 0.9rem;
+    }
+    .container_copyright > p{
+        font-size: 0.8rem;
+            }
 }
