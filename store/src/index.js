@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import LayoutWrapper from '../src/GlobalRule/LayoutWrapper.jsx';
 // Importando rotas
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginAccount from './pages/LoginAccount.jsx';
@@ -22,64 +22,65 @@ import Profile from './pages/Profile/Profile.jsx';
 
 
 
- const router = createBrowserRouter([
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <LayoutWrapper><App /></LayoutWrapper>
+  },
+  {
+    path: '/login',
+    element: <LayoutWrapper><LoginAccount /></LayoutWrapper>
+  },
+  {
+    path: '/register',
+    element: <LayoutWrapper><RegisterAccount /></LayoutWrapper>
+  },
+  {
+    path: '/aboutUs',
+    element: <LayoutWrapper><AboutUs /></LayoutWrapper>
+  },
+  {
+    path: '/section1',
+    element: <LayoutWrapper><Section1P /></LayoutWrapper>
+  },
+  {
+    path: '/section2',
+    element: <LayoutWrapper><Section2P /></LayoutWrapper>
+  },
+  {
+    path: '/section3',
+    element: <LayoutWrapper><Section3P /></LayoutWrapper>
+  },
+  {
+    path: '/changePassword',
+    element: <LayoutWrapper><RecoveryPassword /></LayoutWrapper>
+  },
+  {
+    path: '/resetPassword',
+    element: <LayoutWrapper><ResetPassword /></LayoutWrapper>
+  },
+  {
+    path: '/freight',
+    element: <LayoutWrapper><Freight /></LayoutWrapper>
+  },
+  {
+    path: '/success',
+    element: <LayoutWrapper><Sucess /></LayoutWrapper>
+  },
+  {
+    path: '/failure',
+    element: <LayoutWrapper><Failure /></LayoutWrapper>
+  },
+  {
+    path: '/pending',
+    element: <LayoutWrapper><Pending /></LayoutWrapper>
+  },
+  {
+    path: '/profile',
+    element: <LayoutWrapper><Profile /></LayoutWrapper>
+  },
+]);
 
-  {
-path:"/",
-element: <App/>
-  },
-  {
-   path: "/login",
-   element: <LoginAccount/>
-  },
-  {
-    path: "/register",
-    element: <RegisterAccount/>
-  },
-  {
-    path: "/aboutUs",
-    element: <AboutUs/>
-  },
-  {
-    path: "/section1",
-    element: <Section1P/>
-  },
-  {
-    path: "/section2",
-    element: <Section2P/>
-  },
-  {
-    path: "/section3",
-    element: <Section3P/>
-  },
-  {
-  path: "/changePassword",
-  element: <RecoveryPassword/>
-}, {
-  path: "/resetPassword",
-  element: <ResetPassword/>
-},
-{
-  path: "/freight",
-  element: <Freight/>
-},
-{
-  path: "/success",
-  element: <Sucess/>
-},
-{
-  path: "/failure",
-  element: <Failure/>
-},
-{
-  path: "/pending",
-  element: <Pending/>
-},
-{
-  path: "/profile",
-  element: <Profile/>
-}
- ]);
  
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

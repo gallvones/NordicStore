@@ -181,6 +181,7 @@
     .container_copyright{
         height: 70px;
         flex-wrap: wrap;
+        padding: 10px;
     }
     .container_copyright > h2{
 font-size: 0.9rem;
